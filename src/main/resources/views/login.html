@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="fragments/base :: header-css" />
+	<link rel="stylesheet" th:href="@{/public/bootstrap-4.0.0/dist/signin.css}" href="../../bootstrap-4.0.0/dist/signin.css" />
+</head>
+<body>
+
+	<div class="container-fluid">
+  		<div class="row justify-content-md-center">
+    		<div class="col-md-auto">
+    			<form class="form-signin" th:action="@{/login}" method="post">
+					<img class="mb-4" th:src="@{/public/imges/santander_large.jpg}" src="../../imges/santander_large.jpg" height="75px" width="250px">
+					<h1 class="h3 mb-3 font-weight-normal">Ingresar</h1>
+					<label for="inputEmail" class="sr-only">Usuario</label>
+					<input type="text" placeholder="Usuario C o Z" name="username" class="form-control" required autofocus>
+					<label for="inputPassword" class="sr-only">Password</label>
+					<input type="password" class="form-control" placeholder="Contrase&ntilde;a de dominio" name="password" required>
+					<button class="btn btn-lg btn-danger btn-block" type="submit">Ingresar</button>
+					<div class="alert alert-danger" th:if="${param.error}">
+						<strong>Ocurri&oacute; un error al intentar ingresar al sistema.</strong><br/>
+						Error: <span th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></span> 
+					</div>
+					<div th:replace="fragments/base :: footer" />
+				</form>
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>

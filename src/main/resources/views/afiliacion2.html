@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Contex-Type" content="text/html; charset-UFF-8" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<div th:replace="fragments/base :: header-css" />
+		<style type="text/css">
+			.table{
+				font-size: 0.75rem;
+			}
+			.table td{
+				padding: 0.15rem;
+			}
+			.table th{
+				text-align: center;
+			}
+			#wizard-step-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-content-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-navigation-container {
+			  border-top: 1px solid #eee;
+			  margin: 20px 0;
+			  padding-top: 20px;
+			}
+			.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+		</style>
+
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div th:replace="fragments/base :: header" />
+	<div class="wrapper wrapper-right" ng-class="{'toggled' : isActiveMenu, 'toggled-right' : !isActiveToggle}">
+		<div th:replace="fragments/base :: menu" />
+			 <br/>
+				<br/>
+	
+<!-- agregado new version-->
+<div class="container-fluid" ng-show="initView">    
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+	 <form th:object="${mst_comercios}" th:action="@{/mst_comercios}" method="get">
+	        <input type="text" name="cve_rfc_comercio" id="cve_rfc_comercio" th:value="${cve_rfc_comercio}"/>
+	        <input type="submit" value="Search"/>
+	        <div th:if="${not #lists.isEmpty(cve_rfc_comercio)}">
+	            <h2>Students List</h2>
+	            <table class="table table-striped">
+	                <tr>
+	                    <th>rfc</th>
+	                    <th>comercial</th>
+	                    <th>social</th>
+	                </tr>
+	                <tr th:each="mst_comercios: ${cve_rfc_comercio}">
+	                    <td th:text="${mst_comercios.cve_rfc_comercio}"><a href="/mst_comercios/${mst_comercios.cve_rfc_comercio}">rfc</a></td>
+	                    <td th:text="${mst_comercios.nom_razon_comercial}">comercial</td>
+	                    <td th:text="${mst_comercios.nom_razon_social}">social</td>
+	                </tr>
+	            </table>
+	        </div>
+	    </form>
+		<form action="#" th:action="@{/crearAfil}" th:object="${mst_afiliaciones}" method="post">
+		<label for="exampleInputEmail1">DATOS DE AFILIACIÓN</label>
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="cod_afiliacion">Número de Afiliación</label>
+				   <input type="text" class="form-control" id="cod_afiliacion" name="cod_afiliacion" th:field="*{cve_rfc_comercio}" placeholder="Número de Afiliación" required="required">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="nom_afiliacion">Nombre de Afiliación</label>
+				   <input type="text" class="form-control" id="nom_afiliacion" name="nom_afiliacion" th:field="*{cve_rfc_comercio}" placeholder="Nombre de Afiliación" required="required">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+					 <label for="exampleInputEmail1"></label>
+					<button type="submit" class="btn btn-danger">Heredar datos de comercio</button>
+				</div>
+			</div>
+		</div>
+	
+		<hr/>
+		<!-- COMLILI falta cambiar nombre de las variables -->
+		<label for="exampleInputEmail1">DATOS DE COBRO</label>
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="num_cuenta_cheque">Cuenta cheque</label>
+				   <input type="text" class="form-control" id="num_cuenta_cheque" name="num_cuenta_cheque" th:field="*{cve_rfc_comercio}" placeholder="cuenta de cheques/por facturación">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="num_cuenta_clabe">Cuenta clabe</label>
+				   <input type="text" class="form-control" id="num_cuenta_clabe" name="num_cuenta_clabe" th:field="*{cve_rfc_comercio}" placeholder="Cuenta de Banco/Por facturación">
+				</div>
+			</div>
+		</div>
+			
+		<hr/>
+	
+		<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+		<label for="exampleInputEmail1">ESQUEMAS</label>
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-2">	
+				<div class="form-group">
+				  <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Plazo</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Sobretasa</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Monto Min</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+		</div>
+		<hr/>
+		<label for="exampleInputEmail1">CAMPAÑAS</label>
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-2">	
+				<div class="form-group">
+				  <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Nombre</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Fecha inicio</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Fecha fin</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+		</div>
+		<!--<div class="row justify-content-end">
+		 COMLILI Calcular -> guardar 
+			<div class="col-md-6" ng-if="vm.user.tipoCredito != 41">
+				<button type="submit" class="btn btn-lg btn-danger btn-block">Guardar</button>
+				<button  class="btn" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button>
+			</div>
+		</div>-->
+		
+			<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-2">	
+				<div class="form-group">
+				    	<button type="submit" class="btn btn-danger">Guardar</button>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				<!-- <button  class="btn btn-danger" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button> -->
+					<button  class="btn btn-danger" name="next" type="reset">Limpiar</button>
+				</div>
+			</div>
+			
+		</div>
+		
+	</form>
+	</div>
+	
+	</div>
+	
+	</div>
+	<div th:replace="fragments/base :: footer" />
+	<div th:replace="fragments/base :: js" />
+		<script>
+			var app = angular.module('myApp', ['ui.bootstrap','ngAnimate','ngResource','loader','authModule','toastr','ngLoadingOverlay']);
+		</script>
+		<script type="text/javascript" th:src="@{/public/app-utilities.js?id=2}"  src="../../public/app-utilities.js"></script>
+        <script type="text/javascript" th:src="@{/private/gestion-financiera/carga-tasas/carga-tasas.js?id=2}"  src="../../private/gestion-financiera/carga-tasas/carga-tasas.js"></script>
+	
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8"/>
+		<div th:replace="fragments/base :: header-css" />
+		<style type="text/css">
+			.table{
+				font-size: 0.75rem;
+			}
+			.table td{
+				padding: 0.15rem;
+			}
+			.table th{
+				
+			}
+			#wizard-step-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-content-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-navigation-container {
+			  border-top: 1px solid #eee;
+			  margin: 20px 0;
+			  padding-top: 20px;
+			}
+			.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+    
+.clase a{ (estado off)
+color: #ff0000;
+}
+.clase a:hover{ (estado rollover)
+color:#ffcc00;
+}
+.clase a.seleccionado { (estado selección actual).
+color:#000;
+}
+}
+		</style>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl">
+	<div th:replace="fragments/base :: header" />
+	<div class="wrapper wrapper-right" ng-class="{'toggled' : isActiveMenu, 'toggled-right' : !isActiveToggle}">
+		<div th:replace="fragments/base :: menu" />
+		
+		<br/>
+		 <div class="container-fluid" ng-show="initView">  
+		
+					<!-- COMLILI body -->
+<div class="col-md-12">	
+
+					<div class="row">
+						<div class="col-md-4 ">
+							<a class="btn btn-primaryli btn-block" th:href="@{/comercio}" >
+							    <b>1. COMERCIO</b><br>			    
+							</a>
+						</div>
+						<div class="col-md-4 ">
+							<a class="btn btn-primaryli btn-block"  th:href="@{/afiliacion}">
+							    <b>2. AFILIACIÓN</b><br>
+						</a>
+						</div>
+						<div class="col-md-4 ">
+							<a class="btn btn-primary btn-block"  th:href="@{/campania}">
+							    <b>3. CAMPAÑAS</b><br>
+							</a>
+						</div>
+						</div>
+
+					
+
+
+      		  
+			
+					<br/>
+					
+			    <form th:object="${mst_campanias}" th:action="@{/mst_campanias}" method="get">
+				    <div class="form-group">
+				        <input type="text" style="width: 300px; height: 30px;" size=60 name="des_campania" id="des_campania" placeholder="Codigo de la campaña" th:value="${Search}" required="required"/>
+				        <input class="btn btn-danger" type="submit" value="Buscar"/>
+					</div>
+			    </form>	
+			    <br/>
+			    <hr/>
+			    
+				<form action="#" th:action="@{/crearCamp}" th:object="${mst_campanias}" method="post">
+					<div th:if="${not #arrays.isEmpty(des_campania)}">
+						<label for="exampleInputEmail1">DATOS DE LA CAMPAÑA</label>
+						<div class="row" ng-if="!vm.user.esCliente">
+							<div class="col-md-3">	
+								<div class="form-group">
+								   <label for="des_campania">Nombre de la campaña</label>
+								   <input type="text" class="form-control" id="des_campania" name="des_campania" th:field="*{des_campania}" placeholder="Nombre de la campaña" required="required"/>
+								</div>
+							</div>
+							<div class="col-md-2">	
+								<div class="form-group">
+									<label for="fec_inicio">Fecha inicio</label>
+									<input type="text" class="form-control" name="fec_inicio" id="fec_inicio"  th:field="*{fec_inicio}" placeholder="dd/mm/yy" value="{{mst_campanias.fec_inicio | date:'dd/mm/yy'}}" required="required"/>
+								</div>
+							</div>
+							<div class="col-md-2">	
+								<div class="form-group">
+									<label for="fec_fin">Fecha fin</label>
+									<input type="text" class="form-control" name="fec_fin" id="fec_fin"  th:field="*{fec_fin}" placeholder="dd/mm/yyyy" value="{{mst_campanias.fec_fin | date:'dd/mm/yyyy'}}" required="required"/>
+								</div>
+							</div>
+						
+						<div class="col-md-3">	
+						<div class="panel panel-info">
+							<table class="table table-striped">
+							
+								<thead>
+										<tr>
+										<th>Plazo</th>
+										<th>Comisión</th>
+										<th>Monto Min</th>
+									</tr>
+								</thead>
+									<tbody>
+										<tr>
+										
+											<td >										
+												<input type="text" class="col-md-10" name="num_meses" id="num_meses"  required="required"/>
+											</td>
+											<td>
+												<input type="text" class="col-md-10" name="ptc_sobretasa" id="ptc_sobretasa"  required="required"/>
+											</td> 
+											<td >
+												<input type="text" class="col-md-10" name="mto_minimo" id="mto_minimo"  required="required"/>
+											</td>
+
+										</tr>
+									</tbody>									
+							</table>
+						</div>
+						</div>
+						<div class="col-md-2">	
+								<div class="form-group">
+									<label for="iva">Iva aplicable</label>
+									<input type="text" class="form-control disabled" name="iva" id="iva"   placeholder="16%" disabled required="required"/>
+								</div>
+							</div>
+							</div>
+						<div class="row" ng-if="vm.user.tipoCredito != 41">
+							<div class="col-md-2">	
+								<div class="form-group">
+								    	<button type="submit" class="btn btn-danger">Guardar</button>
+								</div>
+							</div>							 
+						</div>
+					</div> 
+				</form>
+				
+				 <form th:object="${mst_campanias}" th:action="@{/eliminarCamp}" method="get">
+				 <div th:if="${not #arrays.isEmpty(des_campania)}">
+				    <div class="form-group">
+				        <input type="hidden" style="width: 300px; height: 30px;" size=60 name="des_campania" id="des_campania" th:field="*{des_campania}"  placeholder="Codigo de la campaña" th:value="${Search}" required="required"/>
+				        <input class="btn btn-danger" type="submit" value="Eliminar"/>
+					</div>
+					</div>
+			    </form>	
+
+			
+
+	<!-- *********************termina primer form, empieza form para crear un nuevo registro -->	
+				<div th:if="${#arrays.isEmpty(des_campania)}">		
+					<form action="#" th:action="@{/crearCamp}" th:object="${mst_campanias}" method="post">
+					<div th:object="${rel_campanias_plazos}" >
+					
+						<label for="exampleInputEmail1">DATOS DE LA CAMPAÑA</label>
+						<div class="row" ng-if="!vm.user.esCliente">
+							<div class="col-md-3">	
+								<div class="form-group">
+								   <label for="des_campania">Nombre de la campaña</label>
+								   <input type="text" class="form-control" id="des_campania" name="des_campania" placeholder="Nombre de la campaña" required="required"/>
+								</div>
+							</div>
+							<div class="col-md-2">	
+								<div class="form-group">
+									<label for="fec_inicio">Fecha inicio</label>
+									<input type="text" class="form-control" name="fec_inicio" id="fec_inicio"  placeholder="dd/mm/yy" value="{{mst_campanias.fec_inicio | date:'dd/mm/yy'}}" required="required"/>
+								</div>
+							</div>
+							<div class="col-md-2">	
+								<div class="form-group">
+									<label for="fec_fin">Fecha fin</label>
+									<input type="text" class="form-control" name="fec_fin" id="fec_fin"   placeholder="dd/mm/yy" value="{{mst_campanias.fec_fin | date:'dd/mm/yy'}}" required="required"/>
+								</div>
+							</div>
+						
+							<div class="col-md-3">	
+						<div class="panel panel-info">
+							<table class="table table-striped">
+							
+								<thead>
+										<tr>
+										<th>Plazo</th>
+										<th>Comisión</th>
+										<th>Monto Min</th>
+									</tr>
+								</thead>
+									<tbody>
+										<tr>
+										
+											<td >										
+												<input type="text" class="col-md-10" name="num_meses" id="num_meses"  required="required"/>
+											</td>
+											<td>
+												<input type="text" class="col-md-10" name="ptc_sobretasa" id="ptc_sobretasa"  required="required"/>
+											</td> 
+											<td >
+												<input type="text" class="col-md-10" name="mto_minimo" id="mto_minimo"  required="required"/>
+											</td>
+
+										</tr>
+									</tbody>									
+							</table>
+						</div>
+						</div>
+						<div class="col-md-2">	
+								<div class="form-group">
+									<label for="iva">Iva aplicable</label>
+									<input type="text" class="form-control disabled" name="iva" id="iva"   placeholder="16%" disabled required="required"/>
+								</div>
+							</div>
+					</div>
+					</div>
+						<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+						<div class="row" ng-if="vm.user.tipoCredito != 41">
+							<div class="col-md-2">	
+								<div class="form-group">
+								    	<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Guardar</button>
+								</div>
+							</div>
+							<div class="col-md-2">	
+								<div class="form-group">
+								<!-- <button  class="btn btn-danger" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button> -->
+									<button  class="btn btn-danger" name="next" type="reset">Limpiar</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div th:replace="fragments/base :: footer" />
+	<div th:replace="fragments/base :: js" />
+	<script>
+		var app = angular.module('myApp', ['ui.bootstrap','ngAnimate','ngResource','loader','authModule','toastr','ngLoadingOverlay']);
+	</script>
+	<script type="text/javascript" th:src="@{/public/app-utilities.js?id=2}"  src="../../public/app-utilities.js"></script>
+    <script type="text/javascript" th:src="@{/private/gestion-financiera/carga-tasas/carga-tasas.js?id=2}"  src="../../private/gestion-financiera/carga-tasas/carga-tasas.js"></script>
+</body>
+</html>

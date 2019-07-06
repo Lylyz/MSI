@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<div th:replace="fragments/base :: header-css" />
+		<style type="text/css">
+			.table{
+				font-size: 0.75rem;
+			}
+			.table td{
+				padding: 0.15rem;
+			}
+			.table th{
+				text-align: center;
+			}
+			#wizard-step-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-content-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-navigation-container {
+			  border-top: 1px solid #eee;
+			  margin: 20px 0;
+			  padding-top: 20px;
+			}
+			.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+		</style>
+    </head>
+    <body ng-app="myApp" ng-controller="myCtrl">
+        
+        <div th:replace="fragments/base :: header" />
+        
+        <div class="wrapper wrapper-right" ng-class="{'toggled' : isActiveMenu, 'toggled-right' : !isActiveToggle}">
+        	<div th:replace="fragments/base :: menu" />
+        	    <br/>
+				<br/>
+            <div class="container-fluid" ng-show="initView">    
+                <div class="row justify-content-md-center">
+					<!-- COMLILI body -->
+
+					<div class="row justify-content-around">
+						<div class="col-md-4 mx-auto">
+							<a class="btn btn-success btn-lg" style="width: 250px;" th:href="@{/cobroAutomatico}">
+								<i class="fas fa-coins"></i>
+							    <b>Cobros Automaticos</b><br>
+							    <small>Movimientos</small><br>
+							    <small>Comercios</small><br>
+							    <small>Afiliaciones</small>
+							    
+							</a>
+						</div>
+						<div class="col-md-4 mx-auto">
+							<a class="btn btn-success btn-lg" style="width: 250px;" th:href="@{/cobroManual}" ng-click="vm.clickCliente(false)">
+								<i class="fas fa-hand-holding-usd" ></i>
+							    <b>Cobros Manuales</b><br>
+							    <small>Movimientos</small><br>
+							    <small>Cadenas</small><br>
+							    <small>Comercios</small>
+							</a>
+						</div>
+						<div class="col-md-4 mx-auto">
+							<a class="btn btn-success btn-lg" style="width: 250px;" th:href="@{/facturacion}" ng-click="vm.clickCliente(true)">
+								<i class="fas fa-file-invoice-dollar"></i>
+							    <b>Facturacion</b><br>
+							    <small>Cadenas</small><br>
+							    <small>Comercios</small><br>
+							    <small>Afiliaciones</small>
+							</a>
+						</div>
+						</div>
+
+      			</div>
+				<br/>
+				<br/>
+      			 <div class="row justify-content-md-center">
+					<div class="row justify-content-around">
+						<div class="col-md-4 mx-auto">
+							<a class="btn btn-success btn-lg" style="width: 250px;" th:href="@{/reporting}" ng-click="vm.clickCliente(true)">
+								<i class="fas fa-chart-pie"></i>
+							    <b>Reporting</b><br>
+							    <small>Creación de reportes...</small><br><br>
+							    <br>
+							    
+							</a>
+						</div>
+						
+						<div class="col-md-4 mx-auto">
+							<a class="btn btn-success btn-lg" style="width: 250px;" th:href="@{/parametria}" ng-click="vm.clickCliente(true)">
+								<i class="fas fa-wrench"></i>
+							    <b>Parametria</b><br>
+							    <small>Mantenimiento y</small><br>
+							    <small>actualizacion de </small><br>
+							    <small>parámetros</small>
+							</a>
+						</div>
+						</div>
+
+      			</div>
+
+            </div>
+        </div>
+        
+        <div th:replace="fragments/base :: footer" />
+		<div th:replace="fragments/base :: js" />
+		<script>
+			var app = angular.module('myApp', ['ui.bootstrap','ngAnimate','ngResource','loader','authModule','toastr','ngLoadingOverlay']);
+		</script>
+		<script type="text/javascript" th:src="@{/public/app-utilities.js?id=2}"  src="../../public/app-utilities.js"></script>
+        <script type="text/javascript" th:src="@{/private/gestion-financiera/carga-tasas/carga-tasas.js?id=2}"  src="../../private/gestion-financiera/carga-tasas/carga-tasas.js"></script>
+    </body>
+</html>

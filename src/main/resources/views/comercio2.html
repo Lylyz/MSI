@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Contex-Type" content="text/html; charset-UFF-8" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<div th:replace="fragments/base :: header-css" />
+		<style type="text/css">
+			.table{
+				font-size: 0.75rem;
+			}
+			.table td{
+				padding: 0.15rem;
+			}
+			.table th{
+				text-align: center;
+			}
+			#wizard-step-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-content-container {
+			  margin: 20px 0;
+			}
+			
+			#wizard-navigation-container {
+			  border-top: 1px solid #eee;
+			  margin: 20px 0;
+			  padding-top: 20px;
+			}
+			.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+		</style>
+
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+	<div th:replace="fragments/base :: header" />
+	<div class="wrapper wrapper-right" ng-class="{'toggled' : isActiveMenu, 'toggled-right' : !isActiveToggle}">
+		<div th:replace="fragments/base :: menu" />
+			 <br/>
+				<br/>
+	
+	 <div class="container-fluid" ng-show="initView">    
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">		
+			<div class="row" ng-if="!vm.user.esCliente">
+				<tr data-th-each="mst_comercios : ${mst_comercioss}">
+				<div class="col-md-4">	
+					<div class="form-group">	   
+					    <input type="text" class="form-control" name="cve_rfc_comercio" id="cve_rfc_comercio" placeholder="RFC del Comercio" required="required">
+					</div>
+				</div>
+				<!-- <a th:href="@{'/editar/{id}'(id=${mst_comercios.cve_rfc_comercio})}"> -->
+				<a th:href="@{'/comercio2/{id}'(id=${mst_comercios.cve_rfc_comercio})}">
+					<span class="fa-stack">
+						<i class="glyphicon glyphicon-edit"></i>	
+					</span>
+				</a>
+			</div>
+			<hr/>
+			
+		<form action="#" th:action="@{/crear}" th:object="${mst_comercios}" method="post">
+			<div class="row" ng-if="!vm.user.esCliente">
+				<div class="col-md-4">	
+					<div class="form-group">
+					   <label for="cve_rfc_comercio">RFC Comercio</label>
+					   <input type="text" class="form-control" name="cve_rfc_comercio" id="cve_rfc_comercio"  th:field="*{cve_rfc_comercio}" placeholder="RFC del Comercio" required="required">
+					</div>
+				</div>
+				<div class="col-md-4">	
+					<div class="form-group">
+					   <label for="nom_apoderado">Nombre de Representante/Apoderado</label>
+					   <input type="text" class="form-control" name="nom_apoderado" id="nom_apoderado"  th:field="*{nom_apoderado}" placeholder="Nombre del Representante o Apoderado Legal (Opcional)" required="required">
+					</div>
+				</div>
+				<div class="col-md-4">	
+					<div class="form-group">
+					   <label for="nom_razon_comercial">Razon Comercial</label>
+					   <input type="text" class="form-control" name="nom_razon_comercial" id="nom_razon_comercial"  th:field="*{nom_razon_comercial}" placeholder="Razón Comercial" required="required">
+					</div>
+				</div>
+				
+			</div>
+				<!-- COMLILI falta cambiar nombre de las variables -->
+				<div class="row" ng-if="!vm.user.esCliente">
+					<div class="col-md-4">	
+						<div class="form-group">
+						   <label for="nom_ejecutivo">Nombre del Ejecutivo</label>
+						   <input type="text" class="form-control" name="nom_ejecutivo" id="nom_ejecutivo"  th:field="*{nom_ejecutivo}"  placeholder="Nombre del ejecutivo">
+						</div>
+					</div>
+					<div class="col-md-4">	
+						<div class="form-group">
+						   <label for="nom_sucursal">Sucursal</label>
+						   <input type="text" class="form-control" name="nom_sucursal" id="nom_sucursal"  th:field="*{nom_sucursal}" placeholder="Sucursal">
+						</div>
+					</div>
+					<div class="col-md-4">	
+						<div class="form-group">
+						<!--   <label for="fec_alta">Fecha Solicitud</label>
+						   <input type="text" class="form-control" name="fec_alta" id="fec_alta"  th:field="*{nombre}"  placeholder="Fecha de Solicitud">
+						 --> </div>
+					</div>
+				</div>
+					<!-- COMLILI falta cambiar nombre de las variables -->
+				<div class="row" ng-if="!vm.user.esCliente">
+					<div class="col-md-4">	
+						<div class="form-group">
+						   <label for="nom_operador">Nombre del operador</label>
+						   <input type="text" class="form-control" name="nom_operador" id="nom_operador"  th:field="*{nom_operador}"  placeholder="Nombre del encargado de la operación del comercio" required="required">
+						</div>
+					</div>
+				</div>
+				<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+				<!--<div class="row" ng-if="vm.user.tipoCredito != 41">
+					<div class="col-md-6">	
+						<div class="form-group">
+						   <label for="nom_apoderado">Nombre del operador</label>
+						      	<select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()"> 
+						      							    	<option value="">Nombre del Encargado de la Operación del comercio</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+				</div>->>
+				<hr/>
+				<!-- COMLILI falta cambiar nombre de las variables -->
+				<label for="exampleInputEmail1">DATOS DE COBRO</label>
+				<div class="row" ng-if="!vm.user.esCliente">
+					<div class="col-md-4">	
+						<div class="form-group">
+						   <label for="num_cuenta_cheque">Cuenta cheque</label>
+						   <input type="text" class="form-control" name="num_cuenta_cheque" id="num_cuenta_cheque"  th:field="*{num_cuenta_cheque}" placeholder="cuenta de cheques/por facturación">
+						</div>
+					</div>
+					<div class="col-md-4">	
+						<div class="form-group">
+						   <label for="num_cuenta_clabe">Cuenta clabe</label>
+						   <input type="text" class="form-control" name="num_cuenta_clabe" id="num_cuenta_clabe"  th:field="*{num_cuenta_clabe}" placeholder="Cuenta de cheques/cuenta de Banco/Por facturación">
+						</div>
+					</div>
+				</div>
+				<hr/>
+				<!-- COMLILI falta cambiar nombre de las variables -->
+				<label for="exampleInputEmail1">DATOS DE FACTURACIÓN</label>
+				<div class="row" ng-if="!vm.user.esCliente">
+					<div class="col-md-4">	
+						<div class="form-group">
+						   <label for="nom_razon_social">Razón Social</label>
+						   <input type="text" class="form-control" name="nom_razon_social" id="nom_razon_social"   th:field="*{nom_razon_social}" placeholder="Razón Social del comercio">
+						</div>
+					</div>
+				</div>
+				<!-- COMLILI falta cambiar nombre de las variables -->
+				<hr/>
+				<label for="exampleInputEmail1">DOMICILIO FISCAL</label>
+				<div class="row" ng-if="!vm.user.esCliente">
+					<div class="col-md-3">	
+						<div class="form-group">
+						   <label for="nom_calle"></label>
+						   <input type="text" class="form-control" name="nom_calle" id="nom_calle"  th:field="*{nom_calle}" placeholder="Calle">
+						</div>
+					</div>
+					<div class="col-md-1">	
+						<div class="form-group">
+						   <label for="num_exterior"></label>
+						   <input type="text" class="form-control" name="num_exterior" id="num_exterior"   th:field="*{num_exterior}" placeholder="No. Ext">
+						</div>
+					</div>
+					<div class="col-md-1">	
+						<div class="form-group">
+						   <label for="num_interior"></label>
+						   <input type="text" class="form-control" name="num_interior" id="num_interior"   th:field="*{num_interior}" placeholder="Num. Int">
+						</div>
+					</div>
+					<div class="col-md-3">	
+						<div class="form-group">
+						   <label for="nom_colonia"></label>
+						   <input type="text" class="form-control" name="nom_colonia" id="nom_colonia"   th:field="*{nom_colonia}" placeholder="Colonia">
+						</div>
+					</div>
+					<div class="col-md-3">	
+						<div class="form-group">
+						   <label for=""></label>
+						   <input type="text" class="form-control" name="nom_colonia" id="nom_colonia"  th:field="*{nom_colonia}" placeholder="Localidad">
+						</div>
+					</div>
+				</div>
+				<!-- COMLILI falta cambiar nombre de las variables -->
+				<!--<div class="row" ng-if="!vm.user.esCliente">-->
+				<label for="exampleInputEmail1">AFILIACIONES</label>
+				<div class="row" ng-if="!vm.user.esCliente">
+					<div class="col-md-3">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <input type="text" class="nom_municipio" name="nom_municipio" id="nom_municipio"  th:field="*{nom_municipio}" placeholder="Municipio/Delagación">
+						</div>
+					</div>
+					<div class="col-md-3">	
+						<div class="form-group">
+						   <label for="nom_estado"></label>
+						   <input type="text" class="form-control" name="nom_estado" id="nom_estado"  th:field="*{nom_estado}" placeholder="Estado">
+						</div>
+					</div>
+					<div class="col-md-3">	
+						<div class="form-group">
+						   <label for="cod_postal"></label>
+						   <input type="text" class="form-control" name="cod_postal" id="cod_postal"  th:field="*{cod_postal}" placeholder="CP">
+						</div>
+					</div>
+					<div class="col-md-3">	
+						<div class="form-group">
+						   <label for="nom_pais"></label>
+						   <input type="text" class="form-control" name="nom_pais" id="nom_pais"  th:field="*{nom_pais}"  placeholder="Pais">
+						</div>
+					</div>
+				</div>
+				<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+				<div class="row" ng-if="vm.user.tipoCredito != 41">
+					<div class="col-md-2">	
+						<div class="form-group">
+						  <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.afiliacion" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Afiliación</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="col-md-2">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.esquema" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Esquema</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="col-md-2">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.adquiriente" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Adquiriente</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="col-md-2">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.cuentaCheque" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Cuenta de cheques</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="col-md-2">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.cuentaClabe" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Cuenta Clabe</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="col-md-2">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.FechaAlta" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Fecha Alta</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="col-md-2">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.campania" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Campaña vigente</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+					<div class="col-md-2">	
+						<div class="form-group">
+						   <label for="exampleInputEmail1"></label>
+						   <select class="form-control" ng-model="vm.afiliacion.fechaFin" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+						    	<option value="">Fecha Fin Campo</option>
+						      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+						    </select>
+						</div>
+					</div>
+				</div>
+			<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-2">	
+				<div class="form-group">
+				    	<button type="submit" class="btn btn-danger">Guardar</button>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+					<button  class="btn btn-danger" name="next" type="reset">Limpiar</button>
+				</div>
+			</div>
+			
+		</div>
+		
+	</form>
+	</div>
+	
+	</div>
+	
+	</div>
+	<div th:replace="fragments/base :: footer" />
+	<div th:replace="fragments/base :: js" />
+		<script>
+			var app = angular.module('myApp', ['ui.bootstrap','ngAnimate','ngResource','loader','authModule','toastr','ngLoadingOverlay']);
+		</script>
+		<script type="text/javascript" th:src="@{/public/app-utilities.js?id=2}"  src="../../public/app-utilities.js"></script>
+        <script type="text/javascript" th:src="@{/private/gestion-financiera/carga-tasas/carga-tasas.js?id=2}"  src="../../private/gestion-financiera/carga-tasas/carga-tasas.js"></script>
+	
+</body>
+</html>

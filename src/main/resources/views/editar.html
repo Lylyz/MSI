@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Contex-Type" content="text/html; charset-UFF-8" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<title>Editar::Crud</title>
+</head>
+<body>
+	<div class="page-header">
+		<h1>Editar Usuario</h1>
+	</div>
+		<form action="#" th:action="@{/actualizar}" th:object="${mst_comercios}" method="post">
+			<div class="form-group">
+				<label for="cve_rfc_comercio" class="col-sm-2 control-label">cve_rfc_comercio</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="cve_rfc_comercio" id="cve_rfc_comercio" th:field="*{cve_rfc_comercio}" required="required" />
+					</div>
+			</div>
+			<div class="form-group">
+				<label for="nom_razon_social" class="col-sm-2 control-label">nom_razon_social</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="nom_razon_social" id="nom_razon_social" th:field="*{nom_razon_social}" required="required" />
+					</div>
+			</div>
+			<div class="form-group">
+				<label for="nom_razon_comercial" class="col-sm-2 control-label">nom_razon_comercial</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="nom_razon_comercial" id="nom_razon_comercial" th:field="*{nom_razon_comercial}" required="required" />
+					</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default">Modificar</button>
+				</div>
+			</div>
+		</form>
+</body>
+</html>
