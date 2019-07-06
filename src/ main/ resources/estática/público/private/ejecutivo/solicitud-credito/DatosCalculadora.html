@@ -1,0 +1,296 @@
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-6">
+		<div class="row" ng-if="vm.user.esCliente">
+			<div class="col-md-6">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">BUC <i class="fas fa-question-circle" ng-show="dataTooltips.buc" uib-tooltip="{{dataTooltips.buc}}" tooltip-placement="top"></i></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" maxlength="8" ng-model="vm.user.buc" ng-change="vm.bucChanged()" placeholder="Inserte el BUC">
+				   <small id="emailHelp" class="form-text text-muted">Escriba el BUC del cliente a 8 d&iacute;gitos.</small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Nombre</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.nombreCompleto" placeholder="Nombre de cliente" disabled>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Nombre</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.nombre" placeholder="Inserte el Nombre">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Apellido Paterno</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.nomPaterno" placeholder="Inserte el Apellido Paterno">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Apellido Materno</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.nomMaterno" placeholder="Inserte el Apellido Materno">
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				    <div class="form-group">
+				   		<label for="exampleInputEmail1">Monto</label>
+				   		<div class="input-group">
+				   			<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.monto" placeholder="0.0"
+				   				ng-disabled="vm.user.observacion == '4'" currency-mask style="text-align: right;" ng-focus="vm.user.monto=undefined">
+				   				
+					        <div class="input-group-prepend">
+					          <div class="input-group-text">MXN</div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+		  	</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Tipo Cr&eacute;dito <i class="fas fa-question-circle" ng-show="dataTooltips.tipoCredito" uib-tooltip="{{dataTooltips.tipoCredito}}" tooltip-placement="top"></i></label>
+				    <select class="form-control" ng-model="vm.user.tipoCredito" ng-change="vm.changeProduct()">
+				    	<option value="">Seleccione Tipo Cr&eacute;dito</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoCredito.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+		  	</div>
+		  	<div class="col-md-4" ng-if="vm.user.tipoCredito != 41">	
+		  		<div class="form-group">
+		  		   <label>Periodo de Pago Capital <i class="fas fa-question-circle" ng-show="dataTooltips.periodoPagoCapital" uib-tooltip="{{dataTooltips.periodoPagoCapital}}" tooltip-placement="top"></i></label>
+				   <select class="form-control" ng-model="vm.user.observacion" ng-change="vm.observacionChanged()" ng-disabled="!vm.canObservacion">
+				    	<option value="">Seleccione el periodo de pago capital</option>
+				    	<option ng-repeat="obs in vm.observaciones" value="{{obs.id}}">{{obs.nombre}}</option>
+				    </select>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" ng-if="vm.user.tipoCredito == 41">
+			<div class="col-md-6">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Condiciones Cr&eacute;dito</label>
+				   <textarea class="form-control" rows="5" id="comment" ng-model="vm.user.condiciones" maxlength="4000"></textarea>
+				   <small id="emailHelp" class="form-text text-muted">Especifique las condiciones le credito a solicitar.</small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<br/>
+					<label class="btn btn-success btn-file" ng-hide="vm.user.archivo.cargado">
+	    				Anexar Tabla Amortizaci&oacute;n <input id="tablaAmortizacion" type="file" style="display: none;" onchange="angular.element(this).scope().vm.cargarArchivo()">
+					</label>
+					<button ng-hide="!vm.user.archivo.cargado" class="btn btn-success" name="next" type="button" ng-click="vm.verArchivo()">Ver Archivo Cargado <i class="fa fa-eye"></i></button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-6">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Tasa</label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Seleccione el Tipo de tasa</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+<!-- 			<div class="col-md-3" ng-if="vm.user.observacion == '3'">	 -->
+<!-- 				<div class="form-group"> -->
+<!-- 				   <label for="exampleInputEmail1">Tasa Cliente %</label> -->
+<!-- 				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.tasaCliente" ng-value="0" placeholder="0%"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-3" ng-if="vm.user.observacion == '3'">	 -->
+<!-- 				<div class="form-group"> -->
+<!-- 					<br/> -->
+<!-- 					<button ng-disabled="!vm.canAmortizar" class="btn" name="next" type="button" ng-click="vm.verTablaAmortizacion()">Ver Tabla de Amortizaci&oacute;n <i class="fa fa-eye"></i></button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			<div class="col-md-6" ng-if="vm.user.observacion != '4'">
+				<div class="form-group">
+					<br/>
+					<button ng-disabled="!vm.canAmortizar" class="btn" name="next" type="button" ng-click="vm.verTablaAmortizacion()">Ver Tabla de Amortizaci&oacute;n <i class="fa fa-eye"></i></button>
+				</div>
+			</div>
+			
+			<div class="col-md-6" ng-if="vm.user.observacion == '4'">
+				<div class="form-group">
+					<br/>
+					<label class="btn btn-success btn-file" ng-hide="vm.user.archivo.cargado">
+	    				Cargar Tabla Amortizaci&oacute;n <input id="tablaAmortizacion" type="file" style="display: none;" onchange="angular.element(this).scope().vm.cargarArchivo()">
+					</label>
+					<button ng-hide="!vm.user.archivo.cargado" class="btn btn-success" name="next" type="button" ng-click="vm.verArchivo()">Ver Archivo Cargado <i class="fa fa-eye"></i></button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label>Pago Capital <i class="fas fa-question-circle" ng-show="dataTooltips.pagoCapital" uib-tooltip="{{dataTooltips.pagoCapital}}" tooltip-placement="top"></i></label>
+				   <select class="form-control" ng-model="vm.user.pagoCapital" ng-disabled="!vm.canPagoCapital">
+				    	<option value="">Seleccione Pago de Capital</option>
+				      	<option ng-repeat="tc in vm.catalogos.pagoCapital.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label>Pago Intereses <i class="fas fa-question-circle" ng-show="dataTooltips.pagoIntereses" uib-tooltip="{{dataTooltips.pagoIntereses}}" tooltip-placement="top"></i></label>
+				   <select class="form-control" ng-model="vm.user.pagoIntereses" ng-disabled="!vm.canPagoIntereses || vm.user.observacion == '4'">
+				   		<option value="">Seleccione Pago de Intereses</option>
+				      	<option ng-repeat="tc in vm.catalogos.pagoIntereses.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				    <small class="alert-danger" ng-if="vm.user.message && vm.user.message != ''">{{vm.user.message}}</small>
+				</div>
+			</div>
+<!-- 			<div class="col-md-4">	 -->
+<!-- 				<div class="form-group"> -->
+<!-- 				   <label for="exampleInputEmail1">Tiie</label> -->
+<!-- 				   <select class="form-control" ng-model="vm.tiie" ng-disabled="!vm.canPagoIntereses || vm.user.observacion == '4' || vm.user.tipoTasa == '1'" ng-change="vm.user.claveTiie = vm.tiie.clave"> -->
+<!-- 				   		<option value="">Seleccione la Tiie</option> -->
+<!-- 				      	<option ng-repeat="tc in vm.tiies" ng-value="tc">{{tc.descripcion}}</option> -->
+<!-- 				    </select> -->
+<!-- 				    <small class="alert-danger" ng-if="vm.user.message && vm.user.message != ''">{{vm.user.message}}</small> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			<div class="col-md-4">
+				<div class="form-group">
+				    <div class="form-group">
+				    	<label>No. Plazos del cr&eacute;dito <i class="fas fa-question-circle" ng-show="dataTooltips.plazos" uib-tooltip="{{dataTooltips.plazos}}" tooltip-placement="top"></i></label>
+				   		<input type="number" class="form-control" ng-model="vm.user.plazos" placeholder="0" ng-disabled="!vm.canPlazos" ng-disabled="vm.user.observacion == '4'">
+				   		<small class="text-muted" ng-if="vm.user.plazosCupon == 'meses'">{{(vm.user.plazos*vm.user.pagoIntereses)?(vm.user.plazos*vm.user.pagoIntereses):0 | number:0}} meses o {{((vm.user.plazos*vm.user.pagoIntereses)/12) | number:1}} a&ntilde;os</small>
+				   		<small class="text-muted" ng-if="vm.user.plazosCupon == 'dias'">{{(vm.user.plazos)?(vm.user.plazos):0 | number:0}} {{vm.user.plazosCupon == 'dias' ? 'D&iacute;as' : 'Meses'}}</small>
+				   		<small class="alert-danger" ng-if="vm.user.message && vm.user.message != ''">{{vm.user.message}}</small>
+				   		<br>
+				   		<div class="btn-group" ng-show="vm.canPlazosCupon">
+					        <button class="btn btn-primary btn-sm" ng-model="vm.user.plazosCupon" uib-btn-radio="'dias'" ng-disabled="!vm.canPlazos" ng-disabled="vm.user.observacion == '4'">D&iacute;as</button>
+					        <button class="btn btn-primary btn-sm" ng-model="vm.user.plazosCupon" uib-btn-radio="'meses'" ng-disabled="!vm.canPlazos" ng-disabled="vm.user.observacion == '4'">Meses</button>
+					    </div>
+					</div>
+				</div>
+		  	</div>
+		</div>
+		
+		
+		
+		<hr/>
+		
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label>No. Plazos a disponer del cr&eacute;dito <i class="fas fa-question-circle" ng-show="dataTooltips.disposiciones" uib-tooltip="{{dataTooltips.disposiciones}}" tooltip-placement="top"></i></label>
+				   <div class="input-group">
+  						<input type="number" class="form-control" ng-model="vm.user.dispocisiones" placeholder="0" ng-disabled="!vm.canDisposiciones" ng-disabled="vm.user.observacion == '4'">
+				   		<small class="alert-danger" ng-show="vm.user.dispocisiones > vm.user.plazos">El n&uacute;mero de dispocisiones no puede ser mayor al n&uacute;mero de plazos.</small>
+					</div>
+				</div>
+			</div>
+		  	<div class="col-md-4">	
+				<div class="form-group">
+					<label>No. Plazos Gracia <i class="fas fa-question-circle" ng-show="dataTooltips.gracia" uib-tooltip="{{dataTooltips.gracia}}" tooltip-placement="top"></i></label>
+				   <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.gracia" ng-value="0" placeholder="0" ng-disabled="!vm.canGracia">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+				    <div class="form-group">
+				    	<label>Spread Operaci&oacute;n <i class="fas fa-question-circle" ng-show="dataTooltips.spread" uib-tooltip="{{dataTooltips.spread}}" tooltip-placement="top"></i></label>
+				   		<input type="text" class="form-control text-right" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.spread" placeholder="0.0" ng-focus="vm.user.spread=undefined" percentage-mask>
+				   		<small class="alert-danger" ng-if="vm.user.spread >= 100">Ingrese spread en porcentage</small>
+				   		
+				   		<small class="text-muted" ng-if="!vm.user.tipoSpread">Seleccione un tipo</small>
+				   		<div class="btn-group">
+					        <button class="btn btn-primary btn-sm" ng-model="vm.user.tipoSpread" uib-btn-radio="'indicativo'">Indicativo</button>
+					        <button class="btn btn-primary btn-sm" ng-model="vm.user.tipoSpread" uib-btn-radio="'formalizado'">Formalizado</button>
+					    </div>
+					</div>
+				</div>
+		  	</div>
+		</div>
+		
+		<div class="row" ng-if="vm.authService.hasAnyRole('GEST_FIN') && vm.user.tipoCredito != 41">
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="fechaTiie">Fecha Curvas</label>	
+						<p class="input-group">
+							<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.user.fechaCurvas" ng-click="vm.openededDates[0]=!vm.openededDates[0]" is-open="vm.openededDates[0]" datepicker-options="vm.defaultDateOptions" close-text="Cerrar" clear-text="Limpiar" current-text="Fecha Inicio" ng-change="vm.fechaCurvasChanged()"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-secondary" ng-click="vm.openededDates[0] = true">
+									<i class="fa-svg-icon far fa-calendar-alt"></i>
+								</button>
+							</span>
+						</p>
+					<small id="fechaTiieHelp" class="form-text text-muted">*Si no se selecciona se ocupar&aacute; la fecha de hoy</small>
+				</div>
+			</div>
+		
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="fechaTiie">Fecha Tiie</label>	
+						<p class="input-group">
+							<input type="text" class="form-control" ng-disabled="vm.user.tipoTasa != 2 || !vm.user.pagoIntereses" uib-datepicker-popup="dd/MM/yyyy" ng-model="vm.user.fechaTiie" ng-click="vm.openededDates[1]=!vm.openededDates[1]" is-open="vm.openededDates[1]" datepicker-options="vm.defaultDateOptions" close-text="Cerrar" clear-text="Limpiar" current-text="Fecha Inicio" ng-change="vm.dateTiieChanged()"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-secondary" ng-click="vm.openededDates[1] = true">
+									<i class="fa-svg-icon far fa-calendar-alt"></i>
+								</button>
+							</span>
+						</p>
+					<small id="fechaTiieHelp" class="form-text text-muted">*Si no se selecciona se ocupar&aacute; la ultima fecha de la TIIE correspondiente</small>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-end">
+			<div class="col-md-6" ng-if="vm.user.tipoCredito != 41">
+				<button ng-if="vm.user.esCliente" ng-disabled="!(vm.canCalcular && vm.validFechaTiie && vm.validFechaCurvas && vm.user.cliente)" class="btn btn-primary" name="next" type="button" ng-click="vm.calcularTasa()">Calcular <i class="fa fa-arrow-right"></i></button>
+				<button ng-if="!vm.user.esCliente" ng-disabled="!(vm.canCalcular && vm.validFechaTiie && vm.validFechaCurvas)" class="btn btn-primary" name="next" type="button" ng-click="vm.calcularTasa()">Calcular <i class="fa fa-arrow-right"></i></button>
+				<button  class="btn" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button>
+			</div>
+			<div class="col-md-6" ng-if="vm.user.tipoCredito == 41">
+				<button ng-if="vm.user.esCliente" ng-disabled="!(vm.user.condiciones && vm.user.cliente && vm.user.monto)" class="btn btn-primary" name="next" type="button" ng-click="vm.solicitarOtros()">Solicitar Cr&eacute;dito Especial <i class="fa fa-arrow-right"></i></button>
+				<button  class="btn" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button>
+			</div>
+		</div>
+		<hr>
+		
+		<div class="row">
+			<div class="col-md-8">
+			</div>
+			<div class="col-md-6 float-right">				
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-4 text-center">
+		<h3><b>{{(vm.user.tipoTasa == '1')?'Tu tasa calculada':'Tu tasa calculada'}}:</b></h3>
+		<h1 ng-if="vm.user.tipoTasa == '1'"><span class="badge badge-success">{{vm.user.tasa.tti | number:2}}%</span> {{(vm.user.tipoTasa == '1')?'Fija':''}} <sub> **</sub> <sub>***</sub></h1>
+		<h1 ng-if="vm.user.tipoTasa == '2'"><span class="badge badge-warning" >{{vm.user.etiqueta}} {{vm.user.tasa.cof | number:2}}%</span><sub>**</sub></h1>
+<!-- 		<h3 ng-if="vm.user.tipoTasa != '1'">CoF <span class="badge badge-primary">{{vm.user.tasa.cof | number:2}}%</span></h3> -->
+		
+		<span class="badge badge-light">**  Tasa Vigente durante: {{vm.today | date:'dd/MM/yyyy'}}</span><br>
+		<span class="badge badge-light">***  Tasa de transferencia interna</span><br>
+		<span ng-if="vm.user.fechaCurvas" class="badge">Fecha de Curvas: {{vm.user.fechaCurvas | date:'dd/MM/yyyy'}}</span><br>
+		<span ng-if="vm.user.fechaTiie && vm.user.tipoTasa == '2'" class="badge">Fecha TIIE: {{vm.user.fechaTiie | date:'dd/MM/yyyy'}} Valor TIIE: {{vm.user.valorTiie | number:2}}</span>
+		
+		
+		<h4>Folio: {{vm.user.tasa.clave}}</h4>
+	
+		<button ng-disabled="!vm.user.tasa" class="btn btn-info" name="next" type="button" ng-click="vm.verTablaCalculo()">Ver Tabla de calculo <i class="fa fa-eye"></i></button>
+		<hr>
+		<div ng-if="!vm.authService.hasAnyRole('GEST_FIN')">
+			<button ng-if="vm.user.esCliente" ng-disabled="!vm.user.tasa || !vm.user.buc || !vm.user.spread" class="btn btn-primary btn-lg" ng-click="vm.solicitarVoBo()" role="button">Solicitar Vo. Bo.</button>
+		</div>
+	</div>
+</div>
+
+

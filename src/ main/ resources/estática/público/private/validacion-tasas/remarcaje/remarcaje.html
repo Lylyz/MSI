@@ -1,0 +1,42 @@
+<div ng-controller="RemarcajeController as re">
+	<table class="table table-hover table-bordered">
+	  <thead>
+	    <tr>
+	      <th scope="col"></th>
+	      <th scope="col">De</th>
+	      <th scope="col">Fecha</th>
+	      <th scope="col">Comentario</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="remarcaje in re.remarcajes">
+	      <td ng-if="!remarcaje.expandedRow">
+	      	<button ng-if="!remarcaje.expanded" type="button" class="btn btn-primary btn-sm" ng-click="re.expandRow(remarcaje,$index)"><i class="fas fa-plus-square"></i></button>
+	      	<button ng-if="remarcaje.expanded" type="button" class="btn btn-danger btn-sm" ng-click="re.contractRow(remarcaje,$index)"><i class="fas fa-minus-square"></i></button>
+	      </td>
+	      <td ng-if="!remarcaje.expandedRow">{{remarcaje.createdBy}}</td>
+	      <td ng-if="!remarcaje.expandedRow">{{remarcaje.fecha | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+	      <td ng-if="!remarcaje.expandedRow">{{remarcaje.comentario}}</td>
+	      <td ng-if="remarcaje.expandedRow" colspan="4">
+			<table class="table table-hover table-bordered">
+	  			<thead>
+	    			<tr>
+	      				<th scope="col">Campo</th>
+	      				<th scope="col">Valor Actual</th>
+	      				<th scope="col">Valor Previo</th>
+	    			</tr>
+	  			</thead>
+	  			<tbody>
+	  				<tr	ng-repeat="(key, value) in remarcaje.tasa">
+	  					<td ng-if="remarcaje.remarcaje[key] && value != remarcaje.remarcaje[key] && re.rules[key] && !re.rules[key].ignore">{{re.rules[key].label}}</td>
+	  					<td ng-if="remarcaje.remarcaje[key] && value != remarcaje.remarcaje[key] && re.rules[key] && !re.rules[key].ignore">{{value}}</td>
+	  					<td ng-if="remarcaje.remarcaje[key] && value != remarcaje.remarcaje[key] && re.rules[key] && !re.rules[key].ignore">{{remarcaje.remarcaje[key]}}</td>
+	  				</tr>
+	  			</tbody>
+	  		</table>
+	      	
+	      </td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>

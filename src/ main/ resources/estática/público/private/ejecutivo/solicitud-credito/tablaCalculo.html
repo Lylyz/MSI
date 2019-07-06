@@ -1,0 +1,60 @@
+<div class="modal-header">
+	<h3 class="modal-title">Tabla de Calculo</h3>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="ok()"><span aria-hidden="true">&times;</span></button>
+</div>
+
+<div class="modal-body">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12 mt-3">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Cup&oacute;n</th>
+							<th>Fecha</th>
+							<th>D&iacute;as</th>
+							<th>SL</th>
+							<th>df SL</th>
+							<th>D&iacute;as CPN</th>
+							<th>Amortizaci&oacute;n</th>
+							<th>Saldo</th>
+							<th ng-if="tipoTasa != 1">Saldo VP</th>
+							<th ng-if="tipoTasa != 1">Saldo Anterior</th>
+							<th ng-if="tipoTasa != 1">Saldo Factor</th>
+							<th ng-if="tipoTasa == 1">Saldo COF</th>
+							<th ng-if="tipoTasa == 1">Saldo Fija</th>
+							<th ng-if="tipoTasa == 1">Fija Flat</th>
+							<th ng-if="tipoTasa == 1">Factor COF</th>
+							<th ng-if="tipoTasa == 1">Factor Fija</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="cupon in tasa.tabla">
+							<td>{{cupon.id}}</td>
+							<td>{{cupon.fecha | date:'dd/MM/yyyy'}}</td>
+							<td class="text-right">{{cupon.dias}}</td>
+							<td class="text-right">{{cupon.sl | number:6}}</td>
+							<td class="text-right">{{cupon.dfsl | number:6}}</td>
+							<td class="text-right">{{cupon.diasCpn}}</td>
+							<td class="text-right">{{cupon.amortizacion | number:2}}</td>
+							<td class="text-right">{{cupon.saldo | number:2}}</td>
+							<td class="text-right" ng-if="tipoTasa != 1">{{cupon.saldoVp | number:2}}</td>
+							<td class="text-right" ng-if="tipoTasa != 1">{{cupon.saldoAnt | number:2}}</td>
+							<td class="text-right" ng-if="tipoTasa != 1">{{cupon.saldoFac | number:2}}</td>
+							
+							<td class="text-right" ng-if="tipoTasa == 1">{{cupon.saldoCof | number:2}}</td>
+							<td class="text-right" ng-if="tipoTasa == 1">{{cupon.saldoFija | number:2}}</td>
+							<td class="text-right" ng-if="tipoTasa == 1">{{cupon.fijaFlat | number:2}}</td>
+							<td class="text-right" ng-if="tipoTasa == 1">{{cupon.factorCof | number:2}}</td>
+							<td class="text-right" ng-if="tipoTasa == 1">{{cupon.factorFija | number:2}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ok()">Cerrar</button>
+</div>

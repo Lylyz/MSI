@@ -1,0 +1,24 @@
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">De</th>
+      <th scope="col">A</th>
+      <th scope="col">Acci&oacute;n</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Comentario</th>
+      <th scope="col">Archivo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="detalle in historico">
+      <td>{{detalle.fecha | date: "dd/MM/yyyy HH:mm:ss"}}</td>
+      <td>{{recursos.estado.options[detalle.estadoFrom]}}</td>
+      <td>{{recursos.estado.options[detalle.estadoTo]}}</td>
+      <td><b>{{recursos.evento.options[detalle.evento]}}</b></td>
+      <td>{{detalle.usuario}}</td>
+      <td>{{detalle.motivo}}</td>
+      <td><a ng-if="detalle.idArchivo" class="btn btn-sm btn-primary" href="Archivos/{{detalle.idArchivo}}" role="button"><i class="fas fa-download"></i></a></td>
+    </tr>
+  </tbody>
+</table>

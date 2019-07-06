@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-4 text-center">
+		<h3><b>{{vm.user.nombreCompleto}}</b></h3>
+		</br>
+		<b>Tu tasa calculada seria:</b>
+	</div>
+</div>
+</br>
+<div class="row">
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-4 text-center">
+		<h1>Tasa <span class="badge badge-success">{{vm.tasaCalculada.tti | number:2}}%</span></h1>
+		<h3>TIIE28d+ <span class="badge badge-warning">{{vm.tasaCalculada.tiie | number:4}}%</span></h3>
+		<h3>CoF <span class="badge badge-primary">{{vm.tasaCalculada.cof | number:2}}%</span></h3>
+		<hr>
+		<button class="btn btn-primary btn-lg" ng-click="vm.gotoStep(vm.currentStep + 1)" role="button">Solicitar Vo. Bo.</button>
+	</div>
+</div>

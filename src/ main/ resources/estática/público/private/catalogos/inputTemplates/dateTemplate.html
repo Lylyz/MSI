@@ -1,0 +1,11 @@
+<div class="form-group">
+	<label for="{{field.fieldName}}">{{field.fieldLabel}}</label>	
+	<p class="input-group">
+		<input type="text" class="form-control" uib-datepicker-popup="{{(field.format)?field.format:'dd/MM/yyyy'}}" ng-model="modelData[field.fieldName]" ng-value="{{(modelData[field.fieldName])?modelData[field.fieldName]:field.value}}" ng-click="field.opened=!field.opened" is-open="field.opened" datepicker-options="(field.dateOptions)?field.dateOptions:defaultDateOptions" ng-required="{{field.required}}" close-text="Cerrar" clear-text="Limpiar" current-text="Hoy" alt-input-formats="(field.altInputFormats)?field.altInputFormats:defaultAltInputFormats" />
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-secondary" ng-click="field.opened = true">
+			<i class="far fa-calendar-alt"></i>
+			</button>
+		</span>
+	</p>
+</div>

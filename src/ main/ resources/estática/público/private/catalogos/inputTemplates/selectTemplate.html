@@ -1,0 +1,11 @@
+<div class="form-group">
+	<label for="{{field.fieldName}}">{{field.fieldLabel}}</label>
+	<select class="form-control" name="{{field.fieldName}}"" id="{{field.fieldName}}" ng-model="modelData[field.fieldName]" ng-disabled="{{modo == 'VIEW' || field.editable}}"
+			ng-required="{{field.required}}" ng-options="parseKey(key,modelData[field.fieldName]) as value for (key , value) in recursos[field.recurso].options">
+		<option value="">{{(field.placeholder)?field.placeholder:'Seleccione una Opci&oacute;n'}}</option>
+	</select>
+	<div ng-show="form.{{field.fieldName}}.$touched">		
+		<small id="{{field.fieldName}}RequiredError" 	class="form-text alert-danger" 	ng-show="form.{{field.fieldName}}.$error.required">El campo es requerido</small>
+	</div>
+	<small id="{{field.fieldName}}ServerError"	class="form-text alert-danger"	ng-show="form.{{field.fieldName}}.$error.serverMessage">{{form[field.fieldName].$error.serverMessage}}</small>
+</div>

@@ -1,0 +1,226 @@
+<div class="container-fluid" ng-show="initView">    
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                    	<div class="form-group">
+						    <label>Numero de Folio</label>
+						    <input type="text" class="form-control form-control-sm" ng-model="vm.user.tasa.clave" placeholder="Monto">
+						</div>
+					</div>
+                    <div class="col-md-4">
+						<div class="form-group">
+						    <label>N&uacute;mero de Cr&eacute;dito</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+                    <div class="col-md-4">
+						<div class="form-group">
+							<label>Seguro</label>
+							<div class="custom-control custom-radio">
+							  	<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+							  	<label class="custom-control-label" for="customRadio1">Si</label>
+							</div>
+							<div class="custom-control custom-radio">
+							  	<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+							  	<label class="custom-control-label" for="customRadio2">No</label>
+							</div>
+						</div>
+                    </div>
+                    <div class="col-md-12">
+                    	<hr>
+                    	<h4>Datos del acreditado</h4>
+                    </div>
+                    
+                    <div class="col-md-4">
+                    	<div class="form-group">
+						    <label>Nombre / Raz&oacute;n social</label>
+						    <input type="text" class="form-control form-control-sm" ng-model="vm.user.nombreCompleto" placeholder="Monto">
+						</div>
+					</div>
+                    <div class="col-md-2">
+						<div class="form-group">
+							<label>Seguro</label>
+							<div class="custom-control custom-radio">
+							  	<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+							  	<label class="custom-control-label" for="customRadio1">Si</label>
+							</div>
+							<div class="custom-control custom-radio">
+							  	<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+							  	<label class="custom-control-label" for="customRadio2">No</label>
+							</div>
+						</div>
+                    </div>
+                    <div class="col-md-3">
+						<div class="form-group">
+						    <label>No. de Cliente (BUC)</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="No. de Cliente (BUC)" ng-model="vm.user.buc">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Cuenta de cheques No.</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Direcci&oacute;n Regional</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Zona Regional</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Sucursal (Nombre y N&uacute;mero)</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Segmento</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-12">
+                    	<hr>
+                    	<h4>Datos del cr&eacute;dito</h4>
+                    </div>
+                    <div class="col-md-6">
+                    	<div class="card">
+							<div class="card-header">
+						    	Pago
+						  	</div>
+						  	<div class="card-body">
+						    	<div class="custom-control custom-radio">
+								  	<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+								  	<label class="custom-control-label" for="customRadio1">Orden Expresa</label>
+								</div>
+								<div class="custom-control custom-radio">
+								  	<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+								  	<label class="custom-control-label" for="customRadio2">Cargo Autom&aacute;tico</label>
+								</div>
+						  	</div>
+						</div>
+                    </div>
+                    <div class="col-md-6">
+                    	<div class="card">
+							<div class="card-header">
+						    	L&iacute;nea
+						  	</div>
+						  	<div class="card-body">
+						    	<div class="custom-control custom-radio">
+								  	<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+								  	<label class="custom-control-label" for="customRadio1">Con decremento</label>
+								</div>
+								<div class="custom-control custom-radio">
+								  	<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+								  	<label class="custom-control-label" for="customRadio2">Sin decremento</label>
+								</div>
+						  	</div>
+						</div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                    	<div class="form-group">
+						    <label>Importe (en n&uacute;mero y letra)</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+                    </div>
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Plazo</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Moneda</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					
+					<div class="col-md-4">
+						<div class="form-group">
+						    <label>Comisi&oacute;n por apertura</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+						    <label>Comisi&oacute;n por l&iacute;nea no dispuesta</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+						    <label>Factor por pena convencional</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Factor moratorio</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+						    <label>Decremento de l&iacute;nea</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+						    <label>Periodicidad de decremento</label>
+						    <input type="text" class="form-control form-control-sm" placeholder="Meses de amortizaci&oacute;n">
+						</div>
+					</div>
+					<div class="col-md-12">
+                    	<hr>
+                    	<h4>Tasa de inter&eacute;s</h4>
+                    	
+                    	<div class="custom-control custom-radio">
+						  	<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+						  	<label class="custom-control-label" for="customRadio2">Sin garant&iacute;a</label>
+						</div>
+                    	<table class="table">
+                    		<thead>
+                    			<tr>
+                    				<th>Nombre de la garant&iacute;a</th>
+                    				<th>Seguro</th>
+                    				<th>Tipo de intervensi&oacute;n</th>
+                    				<th>Valor de la relacion patrimonial (p.f.) o capital contable (p.m.) MXN</th>
+                    				<th>N&uacute;mero de cliente (superbase)</th>
+                    				<th>N&uacute;mero de garant&iacute;a (UTC)</th>
+                    			</tr>
+                    		</thead>
+                    		<tbody>
+                    			<tr>
+                    				<td>1.-</td>
+                    				<td>
+                    					<div class="custom-control custom-radio">
+										  	<input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+										  	<label class="custom-control-label" for="customRadio1">Si</label>
+										</div>
+										<div class="custom-control custom-radio">
+										  	<input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+										  	<label class="custom-control-label" for="customRadio2">No</label>
+										</div>
+                    				</td>
+                    				<td></td>
+                    				<td></td>
+                    				<td>$</td>
+                    				<td></td>
+                    			</tr>
+                    		</tbody>
+                    	</table>
+                    </div>
+					
+                </div>
+            </div>

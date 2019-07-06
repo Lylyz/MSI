@@ -1,0 +1,98 @@
+<div class="modal-header">
+  <h3>Tabla de calculo</h3>
+</div>
+<div class="modal-body" style="height: 600px; overflow-y: auto;">
+	<h5>Folio: {{folio}}</h5>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Cup&oacute;n</th>
+				<th>Fecha</th>
+				<th>D&iacute;as</th>
+				<th>SL</th>
+				<th>df SL</th>
+				<th>D&iacute;as CPN</th>
+				<th>Amortizaci&oacute;n</th>
+				<th>Saldo</th>
+				<th ng-if="tasa.tipoTasa != 1">Saldo VP</th>
+				<th ng-if="tasa.tipoTasa != 1">Saldo Anterior</th>
+				<th ng-if="tasa.tipoTasa != 1">Saldo Factor</th>
+				<th ng-if="tasa.tipoTasa == 1">Saldo COF</th>
+				<th ng-if="tasa.tipoTasa == 1">Saldo Fija</th>
+				<th ng-if="tasa.tipoTasa == 1">Fija Flat</th>
+				<th ng-if="tasa.tipoTasa == 1">Factor COF</th>
+				<th ng-if="tasa.tipoTasa == 1">Factor Fija</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="cupon in tabla">
+				<td>{{cupon.id}}</td>
+				<td>{{cupon.fecha | date:'dd/MM/yyyy'}}</td>
+				<td class="text-right">{{cupon.dias}}</td>
+				<td class="text-right">{{cupon.sl | number:6}}</td>
+				<td class="text-right">{{cupon.dfsl | number:6}}</td>
+				<td class="text-right">{{cupon.diasCpn}}</td>
+				<td class="text-right">{{cupon.amortizacion | number:2}}</td>
+				<td class="text-right">{{cupon.saldo | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa != 1">{{cupon.saldoVp | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa != 1">{{cupon.saldoAnt | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa != 1">{{cupon.saldoFac | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.saldoCof | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.saldoFija | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.fijaFlat | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.factorCof | number:2}}</td>
+				<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.factorFija | number:2}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div style="display:none"  id="exportable">
+		<table width="100%">
+			<thead>
+				<tr>
+					<th>Cup&oacute;n</th>
+					<th>Fecha</th>
+					<th>D&iacute;as</th>
+					<th>SL</th>
+					<th>df SL</th>
+					<th>D&iacute;as CPN</th>
+					<th>Amortizaci&oacute;n</th>
+					<th>Saldo</th>
+					<th ng-if="tasa.tipoTasa != 1">Saldo VP</th>
+					<th ng-if="tasa.tipoTasa != 1">Saldo Anterior</th>
+					<th ng-if="tasa.tipoTasa != 1">Saldo Factor</th>
+					<th ng-if="tasa.tipoTasa == 1">Saldo COF</th>
+					<th ng-if="tasa.tipoTasa == 1">Saldo Fija</th>
+					<th ng-if="tasa.tipoTasa == 1">Fija Flat</th>
+					<th ng-if="tasa.tipoTasa == 1">Factor COF</th>
+					<th ng-if="tasa.tipoTasa == 1">Factor Fija</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="cupon in tabla">
+					<td>{{cupon.id}}</td>
+					<td>{{cupon.fecha | date:'dd/MM/yyyy'}}</td>
+					<td class="text-right">{{cupon.dias}}</td>
+					<td class="text-right">{{cupon.sl | number:6}}</td>
+					<td class="text-right">{{cupon.dfsl | number:6}}</td>
+					<td class="text-right">{{cupon.diasCpn}}</td>
+					<td class="text-right">{{cupon.amortizacion | number:2}}</td>
+					<td class="text-right">{{cupon.saldo | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa != 1">{{cupon.saldoVp | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa != 1">{{cupon.saldoAnt | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa != 1">{{cupon.saldoFac | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.saldoCof | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.saldoFija | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.fijaFlat | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.factorCof | number:2}}</td>
+					<td class="text-right" ng-if="tasa.tipoTasa == 1">{{cupon.factorFija | number:2}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary mr-auto" type="button" ng-click="regresar()"><i class="fas fa-arrow-left"></i> Regresar</button>
+	<button class="btn btn-success" type="button" ng-click="downloadExcel()"><i class="fas fa-download"></i></button>
+  	<button type="button" class="btn" data-ng-click="modalOptions.close()">Cerrar</button>
+</div>

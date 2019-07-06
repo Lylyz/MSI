@@ -1,0 +1,14 @@
+<div class="row justify-content-center">
+	<div class="col-md-10 ">
+		<div id="graphDiv" class="mermaid">
+	    	{{graficoText}}
+	    </div>
+    </div>
+    <div class="col-md-2">
+    	<small><b>Nomenclatura:</b></small>
+    	<ul class="">
+  			<li class="" ng-repeat="role in roles"><i class='fas {{role.icono}}'></i>&nbsp;{{role.label}}</li>
+		</ul>
+    </div>       
+	<button ng-click="graficar()">Graficar</button>
+</div>

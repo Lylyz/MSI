@@ -1,0 +1,104 @@
+<div class="row justify-content-md-center">
+	<div class="col-md-12">
+		<div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width:100%;">
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					<div class="dataTables_length" id="example_length">
+						<label>	Mostrar 
+							<select class="custom-select custom-select-sm form-control form-control-sm" ng-model="te.table.page.size" ng-options="x for x in te.table.sizes">
+							</select>
+								registros
+						</label>
+						<button type="button" class="btn btn-success btn-sm" ng-click="te.loadTable()"><i class="fas fa-sync-alt"></i></button>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-3">
+					<div class="form-group">
+						<label for="{{field.fieldName}}">Fecha Inicio</label>	
+						<p class="input-group">
+						<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="te.today" ng-click="te.todayOpened=!te.todayOpened" is-open="te.todayOpened" datepicker-options="te.defaultDateOptions" close-text="Cerrar" clear-text="Limpiar" current-text="Fecha Inicio" ng-change="te.dateChanged()"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-secondary" ng-click="te.todayOpened = true">
+									<i class="fa-svg-icon">
+                						<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z"/></svg>
+             						</i>
+								</button>
+							</span>
+						</p>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-3">
+					<div class="form-group">
+						<label for="{{field.fieldName}}">Fecha Fin</label>	
+						<p class="input-group">
+						<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="te.tomorrow" ng-click="te.tomorrowOpened=!te.tomorrowOpened" is-open="te.tomorrowOpened" datepicker-options="te.defaultDateOptions" close-text="Cerrar" clear-text="Limpiar" current-text="Fecha Fin" ng-change="te.dateChanged()"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-secondary" ng-click="te.tomorrowOpened = true">
+									<i class="fa-svg-icon">
+                						<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z"/></svg>
+             						</i>
+								</button>
+							</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<table id="example" class="table table-striped table-bordered dataTable" aria-describedby="example_info">
+						<thead>
+							<tr role="row">
+								<th ng-repeat="field in te.table.model" 
+									ng-class="{sorting : (te.table.sortBy.fieldName != field.fieldName || !te.table.sortBy.order), sorting_asc : (te.table.sortBy.fieldName == field.fieldName && te.table.sortBy.order == 'asc') , sorting_desc : (te.table.sortBy.fieldName == field.fieldName && te.table.sortBy.order == 'desc')}" 
+									ng-click="te.sort(field)" 
+									ng-style="{{field.headerStyle}}">{{field.fieldLabel}}</th>
+								<th rowspan="{{(te.table.filter)?2:1}}" style="vertical-align:middle;" >Operaciones</th>
+							</tr>
+							<tr role="row" ng-if="te.table.filter">
+								<th style="padding-bottom: 0.2rem; padding-top: 0.2rem;" ng-repeat="field in te.table.model">
+									<input class="form-control" style="padding-bottom: 0.2rem; padding-top: 0.2rem; font-size: 0.7rem;" ng-if="te.table.filter[field.fieldName] && te.table.filter[field.fieldName].type == 'text'" ng-model="te.table.filter[field.fieldName].value" type="text" placeholder="{{field.fieldLabel}}" ng-change="te.filtrar(field.fieldName)"/>
+									<select style="height: 1.5rem; font-size: .7rem; padding: 0.2rem;" ng-if="te.table.filter[field.fieldName] && te.table.filter[field.fieldName].type == 'select'" class="form-control" ng-model="te.table.filter[field.fieldName].value" ng-options="key as value for (key , value) in te.recursos[field.recurso].options" ng-change="te.filtrar(field.fieldName, field.minSearchLength)">
+										<option value="">Sin Filtro</option>
+									</select>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr role="row" class="odd" ng-repeat="record in te.table.records">
+								<td ng-repeat="field in te.table.model" ng-style="{{field.colStyle}}">{{ (!field.recurso)?
+																															((field.formatter)? (record[field.fieldName] | metafilter:field.formatter): record[field.fieldName]):  
+																															te.recursos[field.recurso].options[record[field.fieldName]]
+																											}}</td>
+								<td style="text-align: center;">
+									<button uib-popover="Ver detalle" popover-trigger="'mouseenter'" class='btn btn-info' ng-click="te.viewTasa(te.table.records[$index].id)" >
+										<i class="fas fa-eye"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-md-5">
+					<div class="dataTables_info">Mostrando del registro {{(te.table.page.size*(te.table.page.number))+1}} al {{(te.table.page.size*(te.table.page.number))+te.table.page.size}} de {{te.table.page.totalElements}} registro(s)</div>
+				</div>
+				<div class="col-sm-12 col-md-7">
+					<div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+						<ul class="pagination">
+							<li ng-class="{disabled : (te.table.page.number == 0)}" class="paginate_button page-item previous" id="example_previous">
+								<a href="#" class="page-link" ng-click="te.table.page.number = te.table.page.number-1">Previa</a>
+							</li>
+							<li ng-repeat="x in [].constructor(te.table.page.totalPages) track by $index" class="paginate_button page-item" ng-click="te.table.page.number = $index" ng-class="{active: (te.table.page.number == $index)}">
+								<a href="#" class="page-link">{{$index + 1}}</a>
+							</li>
+							<li ng-class="{disabled : (te.table.page.number == te.table.page.totalPages-1)}" class="paginate_button page-item next" id="example_next">
+								<a href="#" class="page-link" ng-click="te.table.page.number = te.table.page.number+1">Siguiente</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

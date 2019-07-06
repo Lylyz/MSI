@@ -1,0 +1,94 @@
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Número de Afiliación</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.afiliacion.numeroAfil" placeholder="Número de Afiliación">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Nombre de Afiliación</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.afiliacion.nombreAfil" placeholder="Nombre de Afiliación">
+				</div>
+			</div>
+		</div>
+	
+		<hr/>
+		<!-- COMLILI falta cambiar nombre de las variables -->
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Cuenta cheque</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.afiliacion.cuentaChequq" placeholder="cuenta de cheques/por facturación">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Cuenta clabe</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.afiliacion.cuentaClabe" placeholder="Cuenta de Banco/Por facturación">
+				</div>
+			</div>
+		</div>
+			
+		<hr/>
+	
+		<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-2">	
+				<div class="form-group">
+				  <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Plazo</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Sobretasa</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Monto Min</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row justify-content-end">
+		<!-- COMLILI Calcular -> guardar -->
+			<div class="col-md-6" ng-if="vm.user.tipoCredito != 41">
+				<button ng-if="vm.user.esCliente" ng-disabled="!(vm.canCalcular && vm.validFechaTiie && vm.validFechaCurvas && vm.user.cliente)" class="btn btn-primary" name="next" type="button" ng-click="vm.calcularTasa()">Guardar <i class="fa fa-arrow-right"></i></button>
+				<button ng-if="!vm.user.esCliente" ng-disabled="!(vm.canCalcular && vm.validFechaTiie && vm.validFechaCurvas)" class="btn btn-primary" name="next" type="button" ng-click="vm.calcularTasa()">Guardar <i class="fa fa-arrow-right"></i></button>
+				<button  class="btn" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button>
+			</div>
+			<div class="col-md-6" ng-if="vm.user.tipoCredito == 41">
+				<button ng-if="vm.user.esCliente" ng-disabled="!(vm.user.condiciones && vm.user.cliente && vm.user.monto)" class="btn btn-primary" name="next" type="button" ng-click="vm.solicitarOtros()">Solicitar Cr&eacute;dito Especial <i class="fa fa-arrow-right"></i></button>
+				<button  class="btn" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-8">
+			</div>
+			<div class="col-md-6 float-right">				
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+

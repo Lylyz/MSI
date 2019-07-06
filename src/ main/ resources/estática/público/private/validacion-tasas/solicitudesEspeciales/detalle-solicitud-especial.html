@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				   	<label for="id">BUC</label>
+					<input type="text" class="form-control" id="buc" aria-describedby="buc" value="{{solicitudEspecial.buc}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+				   	<label for="id">Fecha</label>
+					<input type="datetime" class="form-control" id="fecha" aria-describedby="fecha" value="{{solicitudEspecial.fecha | date:'dd/MM/yyyy'}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label for="id">Ejecutivo</label>
+					<input type="text" class="form-control" id="ejecutivo" aria-describedby="ejecutivo" value="{{solicitudEspecial.ejecutivo}}" ng-disabled="true">
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				    <div class="form-group">
+				   		<label for="monto">Monto</label>
+						<input type="text" class="form-control" id="monto" aria-describedby="monto" value="{{solicitudEspecial.monto | currency}}" ng-disabled="true" style="text-align: right;">
+					</div>
+				</div>
+		  	</div>
+			<div class="col-md-6">	
+				<div class="form-group">
+				   	<label for="observacion">Cliente</label>
+					<input type="text" class="form-control" id="monto" aria-describedby="monto" value="{{solicitudEspecial.nombreCliente}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-6">	
+				
+			</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+			<div class="col-md-10">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Condiciones Cr&eacute;dito</label>
+				   <textarea class="form-control" rows="5" id="comment" ng-disabled="true" ng-model="solicitudEspecial.condiciones" maxlength="4000"></textarea>
+				   <small id="emailHelp" class="form-text text-muted">Especifique las condiciones le credito a solicitar.</small>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<br/>
+					<a ng-if="solicitudEspecial.idArchivo" href="{{'Archivos/'+solicitudEspecial.idArchivo}}" class="btn btn-success" role="button"><i class="fas fa-download"></i> Descargar Tabla Amortizaci&oacute;n</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 text-center">
+		<h3>Folio:</h3>
+		<h3><b>{{solicitudEspecial.id}}</b></h3>
+	</div>
+</div>

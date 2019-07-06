@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h3>Detalle Cliente {{buc}}</h3>
+</div>
+<div class="modal-body" style="height: 600px; overflow-y: auto;">
+	<uib-accordion close-others="true">
+		<div uib-accordion-group class="panel-info" heading="Informacion Basica" is-open="true">
+	  		<ng-include src="getTemplate(0)"></ng-include>
+		</div>
+		<div uib-accordion-group class="panel-info" heading="Informacion Avanzada" ng-click="clickHistorico()">
+	  		<ng-include src="getTemplate(1)"></ng-include>
+		</div>
+	</uib-accordion>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary mr-auto" type="button" ng-click="regresar()"><i class="fas fa-arrow-left"></i> Regresar</button>
+  	<button type="button" class="btn" data-ng-click="modalOptions.close()">Cerrar</button>
+</div>

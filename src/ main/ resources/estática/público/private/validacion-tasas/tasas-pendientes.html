@@ -1,0 +1,81 @@
+<div class="row justify-content-md-center">
+	<div class="col-md-12">
+		<div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width:100%;">
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					<div class="dataTables_length" id="example_length">
+						<label>	Mostrar 
+							<select class="custom-select custom-select-sm form-control form-control-sm" ng-model="vt.table.page.size" ng-options="x for x in vt.table.sizes">
+							</select>
+								registros
+						</label>
+						<button type="button" class="btn btn-success btn-sm" ng-click="vt.loadTable()"><i class="fas fa-sync-alt"></i></button>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6">
+					<div class="form-group">
+						<div class="alert alert-info float-right" role="alert">
+  							Tasas de Hoy: &nbsp;<b>{{vt.today | date:'dd/MM/yyyy'}}</b>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<table id="example" class="table table-striped table-bordered dataTable" aria-describedby="example_info">
+						<thead>
+							<tr role="row">
+								<th ng-repeat="field in vt.table.model" 
+									ng-class="{sorting : (vt.table.sortBy.fieldName != field.fieldName || !vt.table.sortBy.order), sorting_asc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'asc') , sorting_desc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'desc')}" 
+									ng-click="vt.sort(field)" 
+									ng-style="{{field.headerStyle}}">{{field.fieldLabel}}</th>
+								<th rowspan="{{(vt.table.filter)?2:1}}" style="vertical-align:middle;" >Operaciones</th>
+							</tr>
+							<tr role="row" ng-if="vt.table.filter">
+								<th style="padding-bottom: 0.2rem; padding-top: 0.2rem;" ng-repeat="field in vt.table.model">
+									<input class="form-control" style="padding-bottom: 0.2rem; padding-top: 0.2rem; font-size: 0.7rem;" ng-if="vt.table.filter[field.fieldName] && vt.table.filter[field.fieldName].type == 'text'" ng-model="vt.table.filter[field.fieldName].value" type="text" placeholder="{{field.fieldLabel}}" ng-change="vt.filtrar(field.fieldName)"/>
+									<select style="height: 1.5rem; font-size: .7rem; padding: 0.2rem;" ng-if="vt.table.filter[field.fieldName] && vt.table.filter[field.fieldName].type == 'select'" class="form-control" ng-model="vt.table.filter[field.fieldName].value" ng-options="key as value for (key , value) in vt.recursos[field.recurso].options" ng-change="vt.filtrar(field.fieldName, field.minSearchLength)">
+										<option value="">Sin Filtro</option>
+									</select>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr role="row" class="odd" ng-repeat="record in vt.table.records">
+								<td ng-repeat="field in vt.table.model" ng-style="{{field.colStyle}}">{{ (!field.recurso)?
+																															((field.formatter)? (record[field.fieldName] | metafilter:field.formatter): record[field.fieldName]):  
+																															vt.recursos[field.recurso].options[record[field.fieldName]]
+																											}}</td>
+								<td style="text-align: center;">
+									<button uib-popover="Ver detalle" popover-trigger="'mouseenter'" class='btn btn-info' ng-click="vt.viewTasa(vt.table.records[$index].id)" >
+										<i class="fas fa-eye"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-md-5">
+					<div class="dataTables_info">Mostrando del registro {{(vt.table.page.size*(vt.table.page.number))+1}} al {{(vt.table.page.size*(vt.table.page.number))+vt.table.page.size}} de {{vt.table.page.totalElements}} registro(s)</div>
+				</div>
+				<div class="col-sm-12 col-md-7">
+					<div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+						<ul class="pagination">
+							<li ng-class="{disabled : (vt.table.page.number == 0)}" class="paginate_button page-item previous" id="example_previous">
+								<a href="#" class="page-link" ng-click="vt.table.page.number = vt.table.page.number-1">Previa</a>
+							</li>
+							<li ng-repeat="x in [].constructor(vt.table.page.totalPages) track by $index" class="paginate_button page-item" ng-click="vt.table.page.number = $index" ng-class="{active: (vt.table.page.number == $index)}">
+								<a href="#" class="page-link">{{$index + 1}}</a>
+							</li>
+							<li ng-class="{disabled : (vt.table.page.number == vt.table.page.totalPages-1)}" class="paginate_button page-item next" id="example_next">
+								<a href="#" class="page-link" ng-click="vt.table.page.number = vt.table.page.number+1">Siguiente</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

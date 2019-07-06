@@ -1,0 +1,64 @@
+<div ng-controller="RemarcajeTasasController as rt">
+	<div class="form-row">
+		<div class="col-sm-2">
+			<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="id" ng-model="rt.tipoBusqueda" ng-change="rt.tipoBusquedaChanged()">
+			<label class="form-check-label" for="gridRadios1">
+				Folio
+			</label>
+		</div>
+		<div class="col-sm-2">
+			<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="noCredito" ng-model="rt.tipoBusqueda" ng-change="rt.tipoBusquedaChanged()">
+			<label class="form-check-label" for="gridRadios1">
+				No. Cr&eacute;dito
+			</label>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="col-sm-4">
+			<input type="text" class="form-control" id="inputEmail3" ng-model="rt.campoBusqueda" placeholder="{{rt.campoPlaceHolder}}" ng-change="rt.busquedaChanged()">
+		</div>
+	</div>
+	<div class="row justify-content-md-center">
+		<div class="col-md-12">
+			<div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4" style="width:100%;">
+				<div class="row">
+					<div class="col-sm-12">
+						<table id="example" class="table table-striped table-bordered dataTable" aria-describedby="example_info">
+							<thead>
+								<tr role="row">
+									<th>Folio</th>
+									<th>No. Credito</th>
+									<th>Monto</th>
+									<th>Tipo Cr&eacute;dito</th>
+									<th>Tipo Tasa</th>
+									<th>Tasa</th>
+									<th style="vertical-align:middle;">Operaciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr role="row" class="odd" ng-repeat="record in rt.solicitudes">
+									<td>{{record.id}}</td>
+									<td>{{record.noCredito}}</td>
+									<td>{{record.monto | currency}}</td>
+									<td>{{rt.recursos.tipoCredito.options[record.tipoCredito]}}</td>
+									<td>{{rt.recursos.tipoTasa.options[record.tipoTasa]}}</td>
+									<td>{{record.tasa | number:2}}%</td>
+									<td style="text-align: center;">
+										<button uib-popover="Remarcar Tasa" popover-trigger="'mouseenter'" class='btn btn-primary' ng-click="rt.showFormulario(record)" >
+											<i class="fas fa-edit"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-5">
+						<div class="dataTables_info">Mostrando {{rt.solicitudes.length}} registro(s) encontrados</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

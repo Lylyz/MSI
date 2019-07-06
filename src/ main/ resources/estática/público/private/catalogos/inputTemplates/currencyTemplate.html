@@ -1,0 +1,11 @@
+<div class="form-group">
+	<label for="{{field.fieldName}}">{{field.fieldLabel}}</label>
+	<input type="text" class="form-control" name="{{field.fieldName}}"" id="{{field.fieldName}}" ng-model="modelData[field.fieldName]" placeholder="{{field.placeholder}}" ng-disabled="{{modo == 'VIEW' || field.editable}}" 
+			ng-maxlength="{{field.maxlength}}" maxlength="{{field.maxlength}}" ng-required="{{field.required}}" ng-minlength="{{field.minlength}}" currency-mask>
+	<div ng-show="form.{{field.fieldName}}.$touched">		
+		<small id="{{field.fieldName}}RequiredError" 	class="form-text alert-danger" 	ng-show="form.{{field.fieldName}}.$error.required">El campo es requerido</small>
+		<small id="{{field.fieldName}}MinLengthError" 	class="form-text alert-danger" 	ng-show="form.{{field.fieldName}}.$error.minlength">Longitud minima: {{field.minlength}}</small>
+		<small id="{{field.fieldName}}MaxLengthError" 	class="form-text alert-danger" 	ng-show="form.{{field.fieldName}}.$error.maxlength">Longitud maxima: {{field.maxlength}}</small>
+	</div>
+	<small id="{{field.fieldName}}ServerError"	class="form-text alert-danger"	ng-show="form.{{field.fieldName}}.$error.serverMessage">{{form[field.fieldName].$error.serverMessage}}</small>
+</div>

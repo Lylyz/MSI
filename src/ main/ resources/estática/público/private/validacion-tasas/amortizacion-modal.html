@@ -1,0 +1,101 @@
+<div class="modal-header">
+  <h3>Tabla de amortizacion</h3>
+</div>
+<div class="modal-body" style="height: 600px; overflow-y: auto;">
+	<h5>Folio: {{folio}}</h5>
+	<div ng-if="!fromFile">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Plazo</th>
+					<th>Fecha</th>
+					<th>Amortización</th>
+					<th>Disposiciones</th>
+					<th>Capital</th>
+					<th ng-if="tasa.observacion == 3">Interes</th>
+					<th ng-if="tasa.observacion == 3">Anualidad</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="cupon in amortizacion">
+					<td class="text-right">{{cupon.plazo}}</td>
+					<td>{{cupon.fecha | date:'dd/MM/yyyy'}}</td>
+					<td class="text-right">{{cupon.amortizacion | number:2}}</td>
+					<td class="text-right">{{cupon.disposiciones | number:2}}</td>
+					<td class="text-right">{{cupon.capital | number:2}}</td>
+					<td class="text-right" ng-if="tasa.observacion == 3">{{cupon.interes | number:2}}</td>
+					<td class="text-right" ng-if="tasa.observacion == 3">{{cupon.anualidad | number:2}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div style="display:none"  id="exportable">
+			<table width="100%">
+				<thead>
+					<tr>
+						<th>Plazo</th>
+						<th>Fecha</th>
+						<th>Amortizaci&oacute;n</th>
+						<th>Disposiciones</th>
+						<th>Capital</th>
+						<th ng-if="tasa.observacion == 3">Interes</th>
+						<th ng-if="tasa.observacion == 3">Anualidad</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="cupon in amortizacion">
+						<td class="text-right">{{cupon.plazo}}</td>
+						<td>{{cupon.fecha | date:'dd/MM/yyyy'}}</td>
+						<td class="text-right">{{cupon.amortizacion | number:2}}</td>
+						<td class="text-right">{{cupon.disposiciones | number:2}}</td>
+						<td class="text-right">{{cupon.capital | number:2}}</td>
+						<td class="text-right" ng-if="tasa.observacion == 3">{{cupon.interes | number:2}}</td>
+						<td class="text-right" ng-if="tasa.observacion == 3">{{cupon.anualidad | number:2}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div ng-if="fromFile">
+		<table class="table table-bordered" >
+	    	<thead>
+	    		<tr>
+	    			<th>Plazo</th>
+	    			<th>Amortizaci&oacute;n Capital</th>
+	    			<th>Disposiciones</th>
+	    			<th>-</th>
+	    		</tr>
+	    	</thead>
+	    	<tbody>
+		     	<tr ng-repeat="i in excel track by $index">
+		        	<td class="text-right" ng-repeat="j in i track by $index">
+		            	{{j | number:2}}
+		        	</td>
+		  		</tr>
+	  		</tbody>
+  		</table>
+  		<div style="display:none"  id="exportable">
+			<table	width="100%">
+	    	<thead>
+	    		<tr>
+	    			<th>Plazo</th>
+	    			<th>Amortización Capital</th>
+	    			<th>Disposiciones</th>
+	    			<th>-</th>
+	    		</tr>
+	    	</thead>
+	    	<tbody>
+		     	<tr ng-repeat="i in excel track by $index">
+		        	<td class="text-right" ng-repeat="j in i track by $index">
+		            	{{j | number:2}}
+		        	</td>
+		  		</tr>
+	  		</tbody>
+  		</table>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary mr-auto" type="button" ng-click="regresar()"><i class="fas fa-arrow-left"></i> Regresar</button>
+	<button class="btn btn-success" type="button" ng-click="downloadExcel()"><i class="fas fa-download"></i></button>
+  	<button type="button" class="btn" data-ng-click="modalOptions.close()">Cerrar</button>
+</div>

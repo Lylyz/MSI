@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <h3>Detalle de Solicitud</h3>
+</div>
+<div class="modal-body" style="height: 600px; overflow-y: auto;">
+	<div class="card text-center">
+	  <div class="card-header">
+	    <ul class="nav nav-tabs card-header-tabs">
+	      <li class="nav-item">
+	        <a class="nav-link" ng-class="{active: index == 0}" ng-click="changeTemplate(0)" href="#">Tasa Calculada</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" ng-class="{active: index == 2}" ng-click="changeTemplate(2);clickSolicitudFormato()" href="#">Formato de Solicitud</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" ng-if="tasa.remarcada" ng-class="{active: index == 3}" ng-click="changeTemplate(3);" href="#">Historial Remarcaje</a>
+	      </li>
+	      <li class="nav-item ml-auto">
+	        <a class="nav-link" ng-class="{active: index == 1}" ng-click="changeTemplate(1);clickHistorico()" href="#">Bit&aacute;cora</a>
+	      </li>
+	    </ul>
+	  </div>
+	  <div class="card-body">
+	    <ng-include src="getTemplate()"></ng-include>
+	  </div>
+	</div>
+</div>
+<div class="modal-footer">
+	<select ng-if="modo == 'EDIT' && eventosPosibles.length > 0" class="form-control" ng-model="$parent.selectedEvento" ng-options="evento as evento.alias for evento in eventosPosibles" style="width:30%;">
+		<option value="">Seleccione una acci&oacute;n</option>
+	</select>
+	
+	<button ng-if="modo == 'EDIT' && eventosPosibles.length > 0" class="btn btn-primary" ng-disabled="!$parent.selectedEvento" ng-click="ejecutarEvento()">Realizar acci&oacute;n</button>
+  	<button type="button" class="btn" data-ng-click="modalOptions.close()">Cerrar</button>
+</div>

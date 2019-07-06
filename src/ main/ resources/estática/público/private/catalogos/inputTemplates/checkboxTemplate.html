@@ -1,0 +1,9 @@
+<div class="form-group">
+	<label class="form-check-label" for="{{field.fieldName}}">
+		{{field.fieldLabel}}
+	</label>
+	<div class="form-check">
+		<input class="form-check-input" type="checkbox" ng-focus="console.log(form);form[field.fieldName].$setPristine()"  ng-model="modelData[field.fieldName]" ng-disabled="{{modo == 'VIEW' || field.editable}}" ng-checked="{{(modelData[field.fieldName])?modelData[field.fieldName]:false}}" id="{{field.fieldName}}" name="{{field.fieldName}}"">
+	</div>
+	<small id="{{field.fieldName}}ServerError"	class="form-text alert-danger"	ng-show="form.{{field.fieldName}}.$error.serverMessage">{{form[field.fieldName].$error.serverMessage}}</small>
+</div>

@@ -1,0 +1,267 @@
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.user.nommbre" placeholder="RFC del Comercio">
+				</div>
+			</div>
+			<div class="col-md-2">
+				<button  class="btn btn-lg btn-danger btn-block" name="next" type="button" ng-click="vm.limpiar()">Buscar</button>
+			</div>
+		</div>
+		<hr/>
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">RFC Comercio</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.rcfComercio" placeholder="RFC del Comercio">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Razon Comercial</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.razoncomercial" placeholder="Razón Comercial">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Nombre de Representante/Apoderado</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.representante" placeholder="Nombre del Representante o Apoderado Legal (Opcional)">
+				</div>
+			</div>
+		</div>
+		<!-- COMLILI falta cambiar nombre de las variables -->
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Nombre del Ejecutivo</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.ejecutivo" placeholder="Nombre del ejecutivo">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Sucursal</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.sucursal" placeholder="Sucursal">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Fecha Solicitud</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.fechaSolicitud" placeholder="Fecha de Solicitud">
+				</div>
+			</div>
+		</div>
+		<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-6">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Nombre del operador</label>
+				      	<!-- COMLILI<select class="form-control" ng-model="vm.user.tipoTasa" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()"> -->
+				   		<select class="form-control" ng-model="vm.comercio.operador" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Nombre del Encargado de la Operación del comercio</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+		</div>
+			
+		<hr/>
+		<!-- COMLILI falta cambiar nombre de las variables -->
+		<label for="exampleInputEmail1">DATOS DE COBRO</label>
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Cuenta cheque</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.cuentaCheque" placeholder="cuenta de cheques/por facturación">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Cuenta clabe</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.cuentaClabe" placeholder="Cuenta de cheques/cuenta de Banco/Por facturación">
+				</div>
+			</div>
+		</div>
+			
+		<hr/>
+		<!-- COMLILI falta cambiar nombre de las variables -->
+		<label for="exampleInputEmail1">DATOS DE FCTURACIÓN</label>
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1">Razón Social</label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.razonSocial" placeholder="Razón Social del comercio">
+				</div>
+			</div>
+		</div>
+		<!-- COMLILI falta cambiar nombre de las variables -->
+		<hr/>
+		<label for="exampleInputEmail1">DOMICILIO FISCAL</label>
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-3">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.calle" placeholder="Calle">
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.numExt" placeholder="No. Ext">
+				</div>
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.numInt" placeholder="Num. Int">
+				</div>
+			</div>
+			<div class="col-md-3">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.colonia" placeholder="Colonia">
+				</div>
+			</div>
+			<div class="col-md-3">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.localidad" placeholder="Localidad">
+				</div>
+			</div>
+		</div>
+		
+		<!-- COMLILI falta cambiar nombre de las variables -->
+		<!--<div class="row" ng-if="!vm.user.esCliente">-->
+		<label for="exampleInputEmail1">AFILIACIONES</label>
+		<div class="row" ng-if="!vm.user.esCliente">
+			<div class="col-md-3">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.municipio" placeholder="Municipio/Delagación">
+				</div>
+			</div>
+			<div class="col-md-3">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.estadp" placeholder="Estado">
+				</div>
+			</div>
+			<div class="col-md-3">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.cp" placeholder="CP">
+				</div>
+			</div>
+			<div class="col-md-3">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="vm.comercio.pais" placeholder="Pais">
+				</div>
+			</div>
+		</div>
+		
+		<!-- COMLILI falta cambiar nombre de las variables ""Tasa"-> nombre del operador-->
+		<div class="row" ng-if="vm.user.tipoCredito != 41">
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				  <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.afiliacion" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Afiliación</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.esquema" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Esquema</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.adquiriente" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Adquiriente</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.cuentaCheque" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Cuenta de cheques</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.cuentaClabe" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Cuenta Clabe</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.FechaAlta" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Fecha Alta</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.campania" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Campaña vigente</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+			<div class="col-md-1.5">	
+				<div class="form-group">
+				   <label for="exampleInputEmail1"></label>
+				   <select class="form-control" ng-model="vm.afiliacion.fechaFin" ng-disabled="!vm.canTipoTasa" ng-change="vm.changeTipoTasa()">
+				    	<option value="">Fecha Fin Campo</option>
+				      	<option ng-repeat="tc in vm.catalogos.tipoTasa.records" value="{{tc.id}}">{{tc.descripcion}}</option>
+				    </select>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row justify-content-end">
+		<!-- COMLILI Calcular -> guardar -->
+			<div class="col-md-6" ng-if="vm.user.tipoCredito != 41">
+				<button ng-if="vm.user.esCliente" ng-disabled="!(vm.canCalcular && vm.validFechaTiie && vm.validFechaCurvas && vm.user.cliente)" class="btn btn-primary" name="next" type="button" ng-click="vm.calcularTasa()">Guardar <i class="fa fa-arrow-right"></i></button>
+				<button ng-if="!vm.user.esCliente" ng-disabled="!(vm.canCalcular && vm.validFechaTiie && vm.validFechaCurvas)" class="btn btn-primary" name="next" type="button" ng-click="vm.calcularTasa()">Guardar <i class="fa fa-arrow-right"></i></button>
+				<button  class="btn" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button>
+			</div>
+			<div class="col-md-6" ng-if="vm.user.tipoCredito == 41">
+				<button ng-if="vm.user.esCliente" ng-disabled="!(vm.user.condiciones && vm.user.cliente && vm.user.monto)" class="btn btn-primary" name="next" type="button" ng-click="vm.solicitarOtros()">Solicitar Cr&eacute;dito Especial <i class="fa fa-arrow-right"></i></button>
+				<button  class="btn" name="next" type="button" ng-click="vm.limpiar()">Limpiar</button>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-8">
+			</div>
+			<div class="col-md-6 float-right">				
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+

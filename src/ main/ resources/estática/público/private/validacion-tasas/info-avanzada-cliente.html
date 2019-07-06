@@ -1,0 +1,49 @@
+<div ng-if="!avanzada">
+	Espere... (La busqueda puede tardar)
+</div>
+<div ng-if="avanzada">
+	<div class="row">
+		<div class="col-md-4">	
+			<div class="form-group">
+				<label for="id">RFC</label>
+				<input type="text" class="form-control" id="rfcDelCliente" aria-describedby="rfcDelCliente" value="{{avanzada.rfcDelCliente}}" ng-disabled="true">
+			</div>
+		</div>
+		<div class="col-md-4">	
+			<div class="form-group">
+				<label for="id">Fecha de nacimiento</label>
+				<input type="text" class="form-control" id="fecNacimient" aria-describedby="fecNacimient" value="{{avanzada.fecNacimient | date:'dd/MM/yyyy'}}" ng-disabled="true">
+			</div>
+		</div>
+		<div class="col-md-4">	
+			<div class="form-group">
+				<label for="id">Calle</label>
+				<input type="text" class="form-control" id="nomCalle" aria-describedby="nomCalle" value="{{avanzada.nomCalle}}" ng-disabled="true">
+			</div>
+		</div>
+		<div class="col-md-4">	
+			<div class="form-group">
+				<label for="id">Colonia</label>
+				<input type="text" class="form-control" id="desColonia" aria-describedby="desColonia" value="{{avanzada.desColonia}}" ng-disabled="true">
+			</div>
+		</div>
+		<div class="col-md-4">	
+			<div class="form-group">
+				<label for="id">Cod Localidad</label>
+				<input type="text" class="form-control" id="codLodalida" aria-describedby="codLodalida" value="{{avanzada.codLodalida}}" ng-disabled="true">
+			</div>
+		</div>
+		<div class="col-md-4">	
+			<div class="form-group">
+				<label for="id">Cod Ciudad</label>
+				<input type="text" class="form-control" id="codCiudad" aria-describedby="codCiudad" value="{{avanzada.codCiudad}}" ng-disabled="true">
+			</div>
+		</div>
+		<div class="col-md-4">	
+			<div class="form-group">
+				<label for="id">Cod Estado</label>
+				<input type="text" class="form-control" id="codEstado" aria-describedby="codEstado" value="{{avanzada.codEstado}}" ng-disabled="true">
+			</div>
+		</div>
+	</div>
+</div>

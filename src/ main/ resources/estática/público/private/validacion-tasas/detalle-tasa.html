@@ -1,0 +1,155 @@
+<div class="row">
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				   	<label for="id">BUC</label>
+					<div class="input-group">
+						<input type="text" class="form-control" id="buc" aria-describedby="buc" value="{{tasa.buc}}" ng-disabled="true">
+						<button uib-popover="Ver Info Cliente" popover-trigger="'mouseenter'" class="btn btn-warning" type="button" ng-click="verInfoCliente()"><i class="fas fa-user"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+				   	<label for="id">Fecha</label>
+					<input type="datetime" class="form-control" id="fecha" aria-describedby="fecha" value="{{tasa.fecha | date:'dd/MM/yyyy'}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label for="id">Ejecutivo</label>
+					<input type="text" class="form-control" id="ejecutivo" aria-describedby="ejecutivo" value="{{tasa.ejecutivo}}" ng-disabled="true">
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-6">	
+				<div class="form-group">
+				   	<label for="observacion">Periodo de Pago Capital</label>
+					<div class="input-group">
+		  				<input type="text" class="form-control" id="observacion" aria-describedby="observacion" value="{{recursos.observacion.options[tasa.observacion]}}" ng-disabled="true">
+		  				<div class="input-group-append">
+		    				<button ng-if="!tasa.especial" uib-popover="Ver Tabla de Amortizacion" popover-trigger="'mouseenter'" class="btn btn-info" type="button" ng-click="verTabla()"><i class="fas fa-table"></i></button>
+		    				<a ng-if="tasa.especial && tasa.idArchivo" href="{{'Archivos/'+tasa.idArchivo}}" class="btn btn-success" role="button"><i class="fas fa-download"></i></a>
+		  				</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">	
+				
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				    <div class="form-group">
+				   		<label for="monto">Monto</label>
+						<input type="text" class="form-control" id="monto" aria-describedby="monto" value="{{tasa.monto | currency}}" ng-disabled="true" style="text-align: right;">
+					</div>
+				</div>
+		  	</div>
+		  	<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="pagoIntereses">Pago Intereses</label>
+					<input type="text" class="form-control" id="observacion" aria-describedby="pagoIntereses" value="{{recursos.pagoIntereses.options[tasa.pagoInteres]}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   	<label for="tipoTasa">Tipo de Tasa</label>
+					<input type="text" class="form-control" id="tipoTasa" aria-describedby="tipoTasa" value="{{recursos.tipoTasa.options[tasa.tipoTasa]}}" ng-disabled="true">
+				</div>
+			</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				    <div class="form-group">
+				   		<label for="plazos">No. Plazos del cr&eacute;dito</label>
+						<input type="text" class="form-control" id="plazos" aria-describedby="plazos" value="{{tasa.plazos}} plazos" ng-disabled="true">
+						<small class="text-muted">{{getEquivalentePlazos(tasa.plazos,tasa.pagoInteres, tasa.plazosCupon)}}</small>
+					</div>
+				</div>
+		  	</div>
+		  	
+			<div class="col-md-4">	
+				<div class="form-group">
+				   	<label for="disposiciones">No. Plazos a disponer del cr&eacute;dito</label>
+					<input type="text" class="form-control" id="disposiciones" aria-describedby="disposiciones" value="{{tasa.disposiciones}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+				    <label for="tipoCredito">Tipo Cr&eacute;dito</label>
+					<input type="text" class="form-control" id="tipoCredito" aria-describedby="tipoCredito" value="{{recursos.tipoCredito.options[tasa.tipoCredito]}}" ng-disabled="true">
+				</div>
+		  	</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-4">	
+				<div class="form-group">
+				    <label for="pagoCapital">Pago a Capital</label>
+					<input type="text" class="form-control" id="pagoCapital" aria-describedby="pagoCapital" value="{{recursos.pagoCapital.options[tasa.pagoCapital]}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+				   <label for="gracia">No. Plazos Gracia</label>
+				   <input type="text" class="form-control" id="gracia" aria-describedby="gracia" value="{{tasa.gracia}}" ng-disabled="true">
+				</div>
+			</div>
+			<div class="col-md-4 pt-1">
+				<label for="spread"></label>
+				<h4>Spread <span class="badge badge-secondary">{{tasa.spread | number:2}}</span></h4>
+				<small>*{{tasa.tipoSpread | capitalize}}</small>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 text-center">
+		<h3>Folio:</h3>
+		<h3><b>{{tasa.id}}</b></h3>
+		<div ng-if="tasa.noCredito">
+		<h3>No Cr&eacute;dito:</h3>
+		<h3><b>{{tasa.noCredito}}</b></h3>
+		</div>
+		<hr>
+		<h3><b>{{(tasa.tipoTasa == '1')?'Tu tasa calculada':'Tu tasa calculada'}}:</b></h3>
+		<h1 ng-if="tasa.tipoTasa == '1'"><span class="badge badge-success">{{tasa.tasa | number:2}}%</span> {{(tasa.tipoTasa == '1')?'Fija':''}} <sub> **</sub> <sub>***</sub></h1>
+		<h1 ng-if="tasa.tipoTasa == '2'"><span class="badge badge-warning" >{{getEtiquetaTIIE(tasa.plazoTiie)}} {{tasa.cof | number:2}}%</span><sub>**</sub></h1>
+<!-- 		<h3 ng-if="tasa.tipoTasa != '1'">CoF <span class="badge badge-primary">{{tasa.tasa.cof | number:2}}%</span></h3> -->
+		
+		<span class="badge badge-light">***  Tasa de transferencia interna</span><br>
+		<span ng-if="tasa.fechaCurvas" class="badge">Fecha de Curvas: {{tasa.fechaCurvas | date:'dd/MM/yyyy'}}</span><br>
+		<span ng-if="tasa.fechaTiie && tasa.tipoTasa == '2'" class="badge">Fecha TIIE: {{tasa.fechaTiie | date:'dd/MM/yyyy'}} Valor TIIE: {{tasa.valorTiie | number:2}}</span>
+		
+		
+<!-- 		<h4>Folio: {{tasa.tasa.clave}}</h4> -->
+	
+		<button ng-if="!tasa.especial" class="btn btn-info" name="next" type="button" ng-click="vm.verTablaCalculo()">Ver Tabla de calculo <i class="fa fa-eye"></i></button>
+	</div>
+	
+<!-- 	<div class="col-md-4 text-center"> -->
+<!-- 		<h3>Folio:</h3> -->
+<!-- 		<h3><b>{{tasa.id}}</b></h3> -->
+<!-- 		<div ng-if="tasa.noCredito"> -->
+<!-- 		<h3>No Cr&eacute;dito:</h3> -->
+<!-- 		<h3><b>{{tasa.noCredito}}</b></h3> -->
+<!-- 		</div> -->
+<!-- 		<hr> -->
+<!-- 		<h3>{{(tasa.tipoTasa == '1')?'Tu tasa calculada':' Tasa Calculada para primer periodo'}}:</h3> -->
+<!-- 		<h1><span class="badge badge-success">{{tasa.tasa | number:2}}%</span> {{(tasa.tipoTasa == '1')?'Fija':''}}<sub>***</sub></h1> -->
+<!-- 		<h3 ng-if="tasa.tipoTasa == '2'"><span class="badge badge-warning" >{{getEtiquetaTIIE(tasa.plazoTiie)}} {{tasa.cof | number:2}}%</span><sub>**</sub></h3> -->
+<!-- <!-- 		<h3>CoF <span class="badge badge-primary">{{tasa.cof | number:2}}%</span></h3> --> -->
+<!-- 		<span ng-if="tasa.especial" class="badge badge-warning" >*TASA ESPECIAL*</span> -->
+<!-- 		<span class="badge badge-light">***  Tasa de transferencia interna</span> -->
+<!-- 		<hr> -->
+<!-- 		<button ng-if="!tasa.especial" class="btn btn-primary mt-2" type="button" ng-click="verTablaCalculo()"><i class="fas fa-calculator"></i> Tabla de calculo</button> -->
+<!-- 	</div> -->
+</div>

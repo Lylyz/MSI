@@ -1,0 +1,50 @@
+<!DDOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Contex-Type" content="text/html; charset-UFF-8" />
+<link rel="stylesheet"
+href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<title>Nuevo::Crud</title>
+</head>
+<body>
+	<div class="page-header">
+		<h1>Nuevo Usuario</h1>
+	</div>
+		<form action="#" th:action="@{/crear}" th:object="${usuario}" method="post">
+		<div class="form-group">
+				<label for="id" class="col-sm-2 control-label">Id</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="id" id="id" placeholder="tu id..." required="required" />
+
+					</div>
+			</div>
+			<div class="form-group">
+				<label for="nombre" class="col-sm-2 control-label">Nombre</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="nombre" id="nombre" placeholder="tu nombre..." required="required" />
+
+					</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-2 control-label">Contraseña</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" name="password" id="password" placeholder="tu password..." required="required" />
+
+					</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-2 control-label">Correo Electronico</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="email" id="email" placeholder="tu email..." required="required" />
+
+					</div>
+			</div>
+			<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">Crear</button>
+					</div>
+			</div>
+		</form>
+</body>
+</html>

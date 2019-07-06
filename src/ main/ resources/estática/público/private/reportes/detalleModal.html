@@ -1,0 +1,118 @@
+<div class="modal-header">
+	<h5 class="modal-title">Detalle</h5>
+	<button type="button" class="close" ng-click="vt.close()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4 my-2" style="width:100%;">
+					<div class="row">
+						<div class="col-sm-12 col-md-6">
+							<div class="dataTables_length" id="example_length">
+								<label>	Mostrar 
+									<select class="custom-select custom-select-sm form-control form-control-sm" ng-model="vt.table.page.size" ng-options="x for x in vt.table.sizes">
+									</select>
+										registros
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="table-responsive">
+								<table id="example" class="table table-sm table-striped table-bordered dataTable" aria-describedby="example_info">
+									<thead>
+										<tr role="row">
+											<th ng-repeat="field in vt.table.model" 
+												ng-class="{sorting : (vt.table.sortBy.fieldName != field.fieldName || !vt.table.sortBy.order), sorting_asc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'asc') , sorting_desc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'desc')}" 
+												ng-click="vt.sort(field)" 
+												ng-style="{{field.headerStyle}}">{{field.fieldLabel}}</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr role="row" class="odd" ng-repeat="record in vt.table.records">
+											<td>{{record['folio']}}</td>
+											<td>{{record['buc']}}</td>
+											<td>{{record['observacion'] == 1 ? 'Lineal' : record['observacion'] == 2 ? 'Bullet' : record['observacion'] == 3 ? 'Francés' : record['observacion'] == 4 ? 'Irregular' : record['observacion'] == 5 ? 'Cup&oacute;n' : 'x'}}</td>
+											<td class="text-right">{{record['monto'] | currency}}</td>
+											<td class="text-right">{{record['spread'] | number:2}}</td>
+											<td class="text-right">{{record['cof']}}</td>
+											<td>{{record['pagoInteres'] == 1 ? 'Mensual' : record['pagoInteres'] == 3 ? 'Trimestral' : record['pagoInteres'] == 6 ? 'Semestral' : ''}}</td>
+											<td>{{record['tipoTasa'] == 1 ? 'Fija' : record['tipoTasa'] == 2 ? 'Variable' : ''}}</td>
+											<td class="text-right">{{record['observacion'] == 5 ? (record['plazosCupon'] == 'dias' ? record['plazos']+' d&iacute;as' : record['plazos']+' meses') : record['plazos']*record['pagoInteres']+' meses'}}</td>
+											<td class="text-right">{{record['disposiciones']}}</td>
+											<td>{{record['tipoCredito'] == 1 ? 'Simple' : record['tipoCredito'] == 2 ? 'Quirografario' : record['tipoCredito'] == 3 ? 'Puente' : record['tipoCredito'] == 4 ? 'Refaccionario' : record['tipoCredito'] == 5 ? 'Habilitación/Avío' : record['tipoCredito'] == 6 ? 'Factoraje' : record['tipoCredito'] == 7 ? 'Cuenta corriente/Revolvente' : ''}}</td>
+											<td>{{record['pagoCapital'] == 1 ? 'Mensual' : record['pagoCapital'] == 3 ? 'Trimestral' : record['pagoCapital'] == 6 ? 'Semestral' : record['pagoCapital'] == 4 ? 'Vencimiento' : ''}}</td>
+											<td class="text-right">{{record['gracia']}}</td>
+										</tr>
+										<!--
+										<tr role="row" class="odd" ng-repeat="record in vt.table.records">
+											<td ng-repeat="field in vt.table.model" ng-style="{{field.colStyle}}">{{ (field.formatter)? (record[field.fieldName] | metafilter:field.formatter): record[field.fieldName]}}</td>
+										</tr>
+										-->
+									</tbody>
+								</table>
+								<div id="exportable" style="display:none">
+									<table width="100%">
+										<thead>
+											<tr role="row">
+												<th ng-repeat="field in vt.table.model" 
+													ng-class="{sorting : (vt.table.sortBy.fieldName != field.fieldName || !vt.table.sortBy.order), sorting_asc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'asc') , sorting_desc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'desc')}" 
+													ng-click="vt.sort(field)" 
+													ng-style="{{field.headerStyle}}">{{field.fieldLabel}}</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr role="row" ng-repeat="record in vt.table.records">
+												<td>{{record['folio']}}</td>
+												<td>{{record['buc']}}</td>
+												<td>{{record['observacion'] == 1 ? 'Lineal' : record['observacion'] == 2 ? 'Bullet' : record['observacion'] == 3 ? 'Francés' : record['observacion'] == 4 ? 'Irregular' : record['observacion'] == 5 ? 'Cup&oacute;n' : 'x'}}</td>
+												<td class="text-right">{{record['monto'] | currency}}</td>
+												<td class="text-right">{{record['spread'] | number:2}}</td>
+												<td class="text-right">{{record['cof']}}</td>
+												<td>{{record['pagoInteres'] == 1 ? 'Mensual' : record['pagoInteres'] == 3 ? 'Trimestral' : record['pagoInteres'] == 6 ? 'Semestral' : ''}}</td>
+												<td>{{record['tipoTasa'] == 1 ? 'Fija' : record['tipoTasa'] == 2 ? 'Variable' : ''}}</td>
+												<td class="text-right">{{record['observacion'] == 5 ? (record['plazosCupon'] == 'dias' ? record['plazos']+' d&iacute;as' : record['plazos']+' meses') : record['plazos']*record['pagoInteres']+' meses'}}</td>
+												<td class="text-right">{{record['disposiciones']}}</td>
+												<td>{{record['tipoCredito'] == 1 ? 'Simple' : record['tipoCredito'] == 2 ? 'Quirografario' : record['tipoCredito'] == 3 ? 'Puente' : record['tipoCredito'] == 4 ? 'Refaccionario' : record['tipoCredito'] == 5 ? 'Habilitación/Avío' : record['tipoCredito'] == 6 ? 'Factoraje' : record['tipoCredito'] == 7 ? 'Cuenta corriente/Revolvente' : ''}}</td>
+												<td>{{record['pagoCapital'] == 1 ? 'Mensual' : record['pagoCapital'] == 3 ? 'Trimestral' : record['pagoCapital'] == 6 ? 'Semestral' : record['pagoCapital'] == 4 ? 'Vencimiento' : ''}}</td>
+												<td class="text-right">{{record['gracia']}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 col-md-5">
+							<div class="dataTables_info">Mostrando del registro {{(vt.table.page.size*(vt.table.page.number))+1}} al {{(vt.table.page.size*(vt.table.page.number))+vt.table.page.size}} de {{vt.table.page.totalElements}} registro(s)</div>
+						</div>
+						<div class="col-sm-12 col-md-7">
+							<div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+								<ul class="pagination">
+									<li ng-class="{disabled : (vt.table.page.number == 0)}" class="paginate_button page-item previous" id="example_previous">
+										<a href="#" class="page-link" ng-click="vt.table.page.number = vt.table.page.number-1">Previa</a>
+									</li>
+									<li ng-repeat="x in [].constructor(vt.table.page.totalPages) track by $index" class="paginate_button page-item" ng-click="vt.table.page.number = $index" ng-class="{active: (vt.table.page.number == $index)}">
+										<a href="#" class="page-link">{{$index + 1}}</a>
+									</li>
+									<li ng-class="{disabled : (vt.table.page.number == vt.table.page.totalPages-1)}" class="paginate_button page-item next" id="example_next">
+										<a href="#" class="page-link" ng-click="vt.table.page.number = vt.table.page.number+1">Siguiente</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-success mr-auto" type="button" ng-click="vt.downloadExcel()"><i class="fas fa-download"></i> Descargar</button>
+  	<button type="button" class="btn" data-ng-click="vt.close()">Cerrar</button>
+</div>

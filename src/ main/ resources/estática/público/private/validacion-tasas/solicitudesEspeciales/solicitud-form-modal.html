@@ -1,0 +1,193 @@
+<div class="modal-header">
+	<h3 class="modal-title">Captura Solicitud {{elemento.fechaCurvas | date:'dd/MM/yyyy'}}</h3>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="ok()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body" style="height: 550px; overflow-y: auto;">
+	<small id="solicitud.buc3" class="form-text text-muted">**Capture las caracteristicas mas parecidas al cr&eacute;dito solicitado.</small>
+	<br>
+	<form novalidate name="solicitudForm">
+		<div class="row">
+			<div class="col-md-6">	
+				<div class="form-group">
+				   <label for="solicitud.buc">BUC</label>
+				   <input type="text" class="form-control" id="solicitud.buc" name="solicitud.buc" aria-describedby="solicitud.buc" maxlength="8" ng-model="solicitud.buc" ng-change="vm.bucChanged()" placeholder="Inserte el BUC" disabled>
+				   <small id="solicitud.buc" class="form-text text-muted">Escriba el BUC del cliente a 8 digitos.</small>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				   <label for="solicitud.nombreCompleto">Nombre</label>
+				   <input type="text" class="form-control" id="solicitud.nombreCompleto" name="solicitud.nombreCompleto" aria-describedby="solicitud.nombreCompleto" ng-model="solicitud.nombreCompleto" placeholder="Nombre de cliente" disabled>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group">
+				    <div class="form-group">
+				   		<label for="solicitud.monto">Monto</label>
+				   		<div class="input-group">
+				   			<input type="text" class="form-control" id="solicitud.monto" name="solicitud.monto" ng-model="solicitud.monto" placeholder="0.0" currency-mask style="text-align: right;" disabled>
+					        <div class="input-group-prepend">
+					          <div class="input-group-text">MXN</div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="solicitud.tipoCredito">Tipo Cr&eacute;dito</label>
+					<select class="form-control" ng-model="solicitud.tipoCredito" name="tipoCredito" ng-options="recurso.id as recurso.descripcion for recurso in recursos.tipoCredito.records" ng-required="true">
+						<option value="">Seleccione Tipo Cr&eacute;dito</option>
+					</select>
+					<div ng-show="solicitudForm.tipoCredito.$touched">		
+						<small id="tipoCreditoRequiredError" 	class="form-text alert-danger" 	ng-show="solicitudForm.tipoCredito.$error.required">El campo es requerido</small>
+						<small id="tipoCreditoMinLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.tipoCredito.$error.minlength">Longitud minima: {{field.minlength}}</small>
+						<small id="tipoCreditoMaxLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.tipoCredito.$error.maxlength">Longitud maxima: {{field.maxlength}}</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label for="solicitud.observacion">Periodo de Pago Capital</label>
+					<select class="form-control" ng-model="solicitud.observacion" name="observacion" ng-options="recurso.id as recurso.descripcion for recurso in recursos.pagoCapital.records" ng-required="true">
+						<option value="">Seleccione el periodo de pago capital</option>
+			    	</select>
+			    	<div ng-show="solicitudForm.observacion.$touched">		
+						<small id="observacionRequiredError" 	class="form-text alert-danger" 	ng-show="solicitudForm.observacion.$error.required">El campo es requerido</small>
+						<small id="observacionMinLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.observacion.$error.minlength">Longitud minima: {{field.minlength}}</small>
+						<small id="observacionMaxLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.observacion.$error.maxlength">Longitud maxima: {{field.maxlength}}</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">	
+				<div class="form-group">
+				   	<label for="solicitud.tipoTasa">Tasa</label>
+				   	<select class="form-control" ng-model="solicitud.tipoTasa" name="tipoTasa" ng-options="recurso.id as recurso.descripcion for recurso in recursos.tipoTasa.records" ng-required="true">
+				    	<option value="">Seleccione el Tipo de tasa</option>
+				    </select>
+				</div>
+				<div ng-show="solicitudForm.tipoTasa.$touched">		
+						<small id="tipoTasaRequiredError" 	class="form-text alert-danger" 	ng-show="solicitudForm.tipoTasa.$error.required">El campo es requerido</small>
+						<small id="tipoTasaMinLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.tipoTasa.$error.minlength">Longitud minima: {{field.minlength}}</small>
+						<small id="tipoTasaMaxLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.tipoTasa.$error.maxlength">Longitud maxima: {{field.maxlength}}</small>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label for="solicitud.pagoCapital">Pago Capital</label>
+					<select class="form-control" ng-model="solicitud.pagoCapital" name="pagoCapital" ng-options="recurso.id as recurso.descripcion for recurso in recursos.pagoCapital.records" ng-required="true">
+						<option value="">Seleccione Pago de Capital</option>
+					</select>
+				</div>
+				<div ng-show="solicitudForm.pagoCapital.$touched">		
+						<small id="pagoCapitalRequiredError" 	class="form-text alert-danger" 	ng-show="solicitudForm.pagoCapital.$error.required">El campo es requerido</small>
+						<small id="pagoCapitalMinLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.pagoCapital.$error.minlength">Longitud minima: {{field.minlength}}</small>
+						<small id="pagoCapitalMaxLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.pagoCapital.$error.maxlength">Longitud maxima: {{field.maxlength}}</small>
+				</div>
+			</div>
+			<div class="col-md-4">	
+				<div class="form-group">
+					<label for="exampleInputEmail1">Pago Intereses</label>
+					<select class="form-control" ng-model="solicitud.pagoIntereses" name="pagoIntereses" ng-options="recurso.id as recurso.descripcion for recurso in recursos.pagoIntereses.records">
+						<option value="">Seleccione Pago de Intereses</option>
+					</select>
+				</div>
+				<div ng-show="solicitudForm.pagoIntereses.$touched">		
+						<small id="pagoInteresesRequiredError" 	class="form-text alert-danger" 	ng-show="solicitudForm.pagoIntereses.$error.required">El campo es requerido</small>
+						<small id="pagoInteresesMinLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.pagoIntereses.$error.minlength">Longitud minima: {{field.minlength}}</small>
+						<small id="pagoInteresesMaxLengthError" 	class="form-text alert-danger" 	ng-show="solicitudForm.pagoIntereses.$error.maxlength">Longitud maxima: {{field.maxlength}}</small>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Plazos</label>
+						<input type="number" class="form-control" ng-model="solicitud.plazos" placeholder="0">
+						<small class="text-muted" ng-if="solicitud.plazosCupon == 'meses'">{{(solicitud.plazos*solicitud.pagoIntereses)?(solicitud.plazos*solicitud.pagoIntereses):0 | number:0}} meses o {{((solicitud.plazos*solicitud.pagoIntereses)/12) | number:1}} a&ntilde;os</small>
+					   	<small class="text-muted" ng-if="solicitud.plazosCupon == 'dias'">{{(solicitud.plazos)?(solicitud.plazos):0 | number:0}} {{solicitud.plazosCupon == 'dias' ? 'D&iacute;as' : 'Meses'}}</small>
+					   	<div class="btn-group">
+					   		<button class="btn btn-primary btn-sm" ng-model="solicitud.plazosCupon" uib-btn-radio="'dias'">D&iacute;as</button>
+					   		<button class="btn btn-primary btn-sm" ng-model="solicitud.plazosCupon" uib-btn-radio="'meses'">Meses</button>
+					   	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+				<div class="col-md-4">	
+					<div class="form-group">
+					   <label for="exampleInputEmail1">Disposiciones</label>
+					   <div class="input-group">
+	  						<input type="number" class="form-control" ng-model="solicitud.dispocisiones" placeholder="0">
+					   		<small class="alert-danger" ng-show="solicitud.dispocisiones > solicitud.plazos">El n&uacute;mero de dispocisiones no puede ser mayor al n&uacute;mero de plazos.</small>
+						</div>
+					</div>
+				</div>
+			  	<div class="col-md-4">	
+					<div class="form-group">
+					   <label for="exampleInputEmail1">Gracia</label>
+					   <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="solicitud.gracia" ng-value="0" placeholder="0">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+					    <div class="form-group">
+					   		<label for="exampleInputEmail1">Spread Operaci&oacute;n</label>
+					   		<input type="number" class="form-control text-right" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="solicitud.spread" placeholder="0.0" ng-focus="solicitud.spread=undefined">
+					   		<div class="btn-group">
+						        <button class="btn btn-primary btn-sm" ng-model="solicitud.tipoSpread" uib-btn-radio="'indicativo'">Indicativo</button>
+						        <button class="btn btn-primary btn-sm" ng-model="solicitud.tipoSpread" uib-btn-radio="'formalizado'">Formalizado</button>
+						    </div>
+						    <small class="text-muted" ng-if="!solicitud.tipoSpread">Seleccione un tipo</small>
+						</div>
+					</div>
+			  	</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+				    	<div class="form-group">
+				   			<label for="solicitud.tasa">Tasa</label>
+				   			<div class="input-group">
+				   				<input type="text" class="form-control" id="solicitud.tasa" name="solicitud.tasa" ng-model="solicitud.tasa" placeholder="0.0" currency-mask style="text-align: right;" >
+					        	<div class="input-group-prepend"><div class="input-group-text">%</div></div>
+					    	</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+				    	<div class="form-group">
+				   			<label for="solicitud.cof">COF</label>
+				   			<div class="input-group">
+				   				<input type="text" class="form-control" id="solicitud.cof" name="solicitud.cof" ng-model="solicitud.cof" placeholder="0.0" currency-mask style="text-align: right;" >
+					        	<div class="input-group-prepend"><div class="input-group-text">%</div></div>
+					    	</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+				    	<div class="form-group">
+				   			<label for="solicitud.tiee">{{(solicitud.tipoTasa == 2 )?'Valor tiie':'Fija Flat'}}</label>
+				   			<div class="input-group">
+				   				<input type="text" class="form-control" id="solicitud.tiee" name="solicitud.tiee" ng-model="solicitud.tiee" placeholder="0.0" currency-mask style="text-align: right;" >
+<!-- 					        	<div class="input-group-prepend"><div class="input-group-text">%</div></div> -->
+					    	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-disabled="solicitudForm.$invalid" ng-click="crearSolicitud()">Guardar Solicitud</button>
+  	<button type="button" class="btn" data-ng-click="modalOptions.close()">Cerrar</button>
+</div>

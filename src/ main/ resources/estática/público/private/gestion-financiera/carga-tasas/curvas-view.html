@@ -1,0 +1,44 @@
+<div class="modal-header">
+	<h3 class="modal-title">Curvas del {{elemento.fechaCurvas | date:'dd/MM/yyyy'}}</h3>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="ok()"><span aria-hidden="true">&times;</span></button>
+</div>
+
+<div class="modal-body">
+	<ul class="list-group">
+  		<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info">
+    		<b>No. Registros</b>
+    		<span class="badge badge-primary badge-pill">{{curvas.length}}</span>
+  		</li>
+	</ul>
+	<div class="col-md-12 mt-3">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Plazo</th>
+					<th>Tasa Base Fija</th>
+					<th>df Base Fija</th>
+					<th>Tasa Base Variable</th>
+					<th>df Base Variable</th>
+					<th>Spread de Liquidez</th>
+					<th>df Spread de Liquidez</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="curva in curvas">
+					<td style="text-align:right">{{curva.plazo}}</td>
+					<td style="text-align:right">{{curva.tasaBaseFija | number:8}}%</td>
+					<td style="text-align:right">{{curva.dfBaseFija | number:11}}</td>
+					<td style="text-align:right">{{curva.tasaBaseVariable | number:8}}%</td>
+					<td style="text-align:right">{{curva.dfBaseVariable | number:9}}</td>
+					<td style="text-align:right">{{curva.spreadLiquidez | number:7}}%</td>
+					<td style="text-align:right">{{curva.dfSpreadLiquidez | number:8}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="modal-footer">
+	<a href="{{'../Archivos/'+elemento.idArchivo}}" class="btn btn-info" role="button">Descargar Archivo</a>
+	<button class="btn btn-primary" type="button" ng-click="ok()">Cerrar</button>
+</div>

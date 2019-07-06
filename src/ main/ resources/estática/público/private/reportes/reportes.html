@@ -1,0 +1,100 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="form-group">
+			<label>Fecha Inicio {{today}}</label>	
+			<p class="input-group">
+			<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="vt.today" ng-click="todayOpened=!todayOpened" is-open="todayOpened" datepicker-options="defaultDateOptions" close-text="Cerrar" clear-text="Limpiar" current-text="Fecha Inicio" ng-change="dateChanged()"/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-secondary" ng-click="todayOpened = true">
+						<i class="fa-svg-icon">
+	            						<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z"/></svg>
+	         						</i>
+					</button>
+				</span>
+			</p>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="form-group">
+			<label>Fecha Fin</label>	
+			<p class="input-group">
+			<input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="vt.tomorrow" ng-click="tomorrowOpened=!tomorrowOpened" is-open="tomorrowOpened" datepicker-options="defaultDateOptions" close-text="Cerrar" clear-text="Limpiar" current-text="Fecha Fin" ng-change="dateChanged()"/>
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-secondary" ng-click="tomorrowOpened = true">
+						<i class="fa-svg-icon">
+	            						<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z"/></svg>
+	         						</i>
+					</button>
+				</span>
+			</p>
+		</div>
+	</div>
+	<div class="col-md-6 text-right">
+		<p>Descargar Filtro</p>
+		<button class="btn btn-success" type="button" ng-click="vt.downloadExcel()"><i class="fas fa-download"></i> Descargar</button>
+	</div>
+</div>
+<table class="table table-sm table-bordered">
+	<thead class="text-center">
+	    <tr class="table-active">
+	      	<th scope="col">Fecha</th>
+	      	<th scope="col">Solicitados</th>
+	      	<th scope="col">Vencidos</th>
+	      	<th scope="col">Pendientes</th>
+	      	<th scope="col">Rechazados</th>
+	      	<th scope="col">Validados</th>
+	      	<th scope="col">Formalizados</th>
+	    </tr>
+  	</thead>
+  	<tbody class="text-right">
+	    <tr ng-repeat="row in tablaReportes">
+	      	<td class="text-center">{{row.fecha | date:"dd-MMMM-yyyy"}}</td>
+	      	<td class="table-active"><a href="#" ng-click="getDetalle(row,'61,25,41,81,24,26,62,21,22,23,83')">{{row.solicitados}}</a></td>
+	      	<td><a href="#" ng-click="getDetalle(row,'83')">{{row.vencidos}}</a></td>
+	      	<td><a href="#" ng-click="getDetalle(row,'21,22,23')">{{row.pendientes}}</a></td>
+	      	<td><a href="#" ng-click="getDetalle(row,'24,26,62')">{{row.rechazados}}</a></td>
+	      	<td><a href="#" ng-click="getDetalle(row,'25,41,81')">{{row.validados}}</a></td>
+	      	<td class="table-active"><a href="#" ng-click="getDetalle(row,'61')">{{row.formalizados}}</a></td>
+	    </tr>
+  	</tbody>
+  	<tfoot class="text-right">
+  		<tr class="table-active">
+  			<th scope="col">Totales</th>
+	      	<th class="table-active" scope="col">{{tablaReportesTotales.solicitados}}</th>
+	      	<th scope="col">{{tablaReportesTotales.vencidos}}</th>
+	      	<th scope="col">{{tablaReportesTotales.pendientes}}</th>
+	      	<th scope="col">{{tablaReportesTotales.rechazados}}</th>
+	      	<th scope="col">{{tablaReportesTotales.validados}}</th>
+	      	<th scope="col">{{tablaReportesTotales.formalizados}}</th>
+  		</tr>
+  	</tfoot>
+</table>
+<div id="exportable" style="display:none">
+	<table width="100%">
+		<thead>
+			<tr role="row">
+				<th ng-repeat="field in vt.table.model" 
+					ng-class="{sorting : (vt.table.sortBy.fieldName != field.fieldName || !vt.table.sortBy.order), sorting_asc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'asc') , sorting_desc : (vt.table.sortBy.fieldName == field.fieldName && vt.table.sortBy.order == 'desc')}" 
+					ng-click="vt.sort(field)" 
+					ng-style="{{field.headerStyle}}">{{field.fieldLabel}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr role="row" ng-repeat="record in vt.table.records">
+				<td>{{record['folio']}}</td>
+				<td>{{record['buc']}}</td>
+				<td>{{record['observacion'] == 1 ? 'Lineal' : record['observacion'] == 2 ? 'Bullet' : record['observacion'] == 3 ? 'Francés' : record['observacion'] == 4 ? 'Irregular' : record['observacion'] == 5 ? 'Cup&oacute;n' : 'x'}}</td>
+				<td class="text-right">{{record['monto'] | currency}}</td>
+				<td class="text-right">{{record['spread'] | number:2}}</td>
+				<td class="text-right">{{record['cof']}}</td>
+				<td>{{record['pagoInteres'] == 1 ? 'Mensual' : record['pagoInteres'] == 3 ? 'Trimestral' : record['pagoInteres'] == 6 ? 'Semestral' : ''}}</td>
+				<td>{{record['tipoTasa'] == 1 ? 'Fija' : record['tipoTasa'] == 2 ? 'Variable' : ''}}</td>
+				<td class="text-right">{{record['observacion'] == 5 ? (record['plazosCupon'] == 'dias' ? record['plazos']+' d&iacute;as' : record['plazos']+' meses') : record['plazos']*record['pagoInteres']+' meses'}}</td>
+				<td class="text-right">{{record['disposiciones']}}</td>
+				<td>{{record['tipoCredito'] == 1 ? 'Simple' : record['tipoCredito'] == 2 ? 'Quirografario' : record['tipoCredito'] == 3 ? 'Puente' : record['tipoCredito'] == 4 ? 'Refaccionario' : record['tipoCredito'] == 5 ? 'Habilitación/Avío' : record['tipoCredito'] == 6 ? 'Factoraje' : record['tipoCredito'] == 7 ? 'Cuenta corriente/Revolvente' : ''}}</td>
+				<td>{{record['pagoCapital'] == 1 ? 'Mensual' : record['pagoCapital'] == 3 ? 'Trimestral' : record['pagoCapital'] == 6 ? 'Semestral' : record['pagoCapital'] == 4 ? 'Vencimiento' : ''}}</td>
+				<td class="text-right">{{record['gracia']}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
