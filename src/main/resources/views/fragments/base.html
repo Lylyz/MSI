@@ -1,0 +1,239 @@
+<div th:fragment="header-css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta http-equiv="X-UA-Compatible" content="IE=11"/>  
+	<meta name="_csrf" th:content="${_csrf.token}"/>
+  	<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+	<meta name="_ctx" th:content="@{/}" />
+	<link rel="stylesheet" th:href="@{/public/bootstrap-4.0.0/dist/css/bootstrap.css}" href="../../bootstrap-4.0.0/dist/css/bootstrap.css" />
+	<link rel="stylesheet" th:href="@{/public/fontawesome-free-5.1.0-web/css/all.css}" href="../../fontawesome-free-5.1.0-web/css/all.css" />
+	<link rel="stylesheet" th:href="@{/public/angular-bootstrap-toggle-master/angular-toggle-switch-bootstrap-3.css}" href="../../angular-bootstrap-toggle-master/angular-toggle-switch-bootstrap-3.css" />
+	<link rel="stylesheet" th:href="@{/public/startbootstrap-simple-sidebar-gh-pages/css/simple-sidebar.css}" href="../../startbootstrap-simple-sidebar-gh-pages/css/simple-sidebar.css" />
+	<link rel="stylesheet" th:href="@{/public/angularjs-slider-master/dist/rzslider.css}" href="../../angularjs-slider-master/dist/rzslider.css" />
+	<link rel="stylesheet" th:href="@{/public/interceptor/angular-toastr.min.css}" href="../../interceptor/angular-toastr.min.css" />
+	<link rel="stylesheet" th:href="@{/public/dataTables.bootstrap4.min.css}" href="../../dataTables.bootstrap4.min.css" />
+	<link rel="stylesheet" th:href="@{/public/mermaid/mermaid.min.css}" href="../../mermaid/mermaid.min.css" />
+<!-- 	<link rel="stylesheet" th:href="@{/public/custom.css}" href="../../custom.css" /> -->
+
+	<title>MSI</title>
+	<style>
+		body {
+			background-color: #f1f1f1;
+		}
+		
+		.starter-template {
+			padding: 3rem 1.5rem;
+			text-align: center;
+		}
+		
+		.border-top {
+			border-top: 1px solid #e5e5e5;
+		}
+		
+		.border-bottom {
+			border-bottom: 1px solid #e5e5e5;
+		}
+		
+		.border-top-gray {
+			border-top-color: #adb5bd;
+		}
+		
+		.box-shadow {
+			box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+		}
+		
+		.lh-condensed {
+			line-height: 1.25;
+		}
+		
+		.navbar, .btn {
+			box-shadow: 0px 0px 3px #666;
+		}
+		.navbar-text {
+			font-size: .8em;
+			color: #fff;
+			font-weight: bold;
+		}
+		.btn3d {
+			transition: all .08s linear;
+			position: relative;
+			outline: medium none;
+			-moz-outline-style: none;
+			border: 0px;
+			margin-right: 10px;
+			margin-top: 15px;
+			color: #fff;
+		}
+		.btn3d:focus {
+			outline: medium none;
+			-moz-outline-style: none;
+		}
+		.btn3d:active {
+			top: 9px;
+		}
+		.btn3d-danger {
+			box-shadow: 0 0 0 1px #ec0000 inset, 0 0 0 2px rgba(255, 255, 255, 0.15)
+				inset, 0 8px 0 0 #c24032, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px
+				1px rgba(0, 0, 0, 0.5);
+			background-color: #ec0000;
+		}
+		.text-monospace {
+			font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+				"Courier New", monospace;
+		}
+		.navbar{
+			padding: 0px;
+		}
+		.navbar .nav-item{
+			color: #fff;
+			border-left: 1px solid rgba(255, 255, 255, 0.3);
+			border-right: 1px solid rgba(255, 255, 255, 0.3);
+			padding: 0.21rem 0.5rem;
+		}
+		.navbar .nav-item.active{
+			background-color: #000;
+		}
+		.navbar .nav-link, .navbar .navbar-toggler{
+			color: #fff;
+		}
+		.navbar .nav-link:hover{
+			color: #f1f1f1;
+		}
+		.tour-backdrop {
+    		background-color: rgba(0, 0, 0, .5);
+    		fill: rgba(0, 0, 0, .5);
+		}
+		.sidebar-nav, .title-template{
+			padding-top: 3.5rem;
+		}
+		@media (max-width: 576px){
+			.navbar-item-toggler {
+			    display: none;
+			}
+		}
+		@media (min-width: 576px){
+			.navbar-item-toggler-min {
+			    display: none;
+			}
+		}
+	</style>
+</div>
+<div th:fragment="header">
+	<nav class="navbar navbar-expand-sm bg-danger fixed-top" ng-init="isCollapsedMenu = true">
+  		<button type="button" class="navbar-toggler" ng-click="isCollapsedMenu = !isCollapsedMenu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="."><img th:src="@{/public/imges/logo.png}" src="../../imges/logo.png" height="36px" width="141px"></a>
+        
+        <div class="navbar-collapse collapse" uib-collapse="isCollapsedMenu" aria-expanded="false" aria-hidden="true" style="height: 0px;">
+			<ul class="navbar-nav mr-auto navbar-item-toggler">
+		      <li class="nav-item" ng-click="isActiveMenu = !isActiveMenu" ng-class="{'active' : isActiveMenu}">
+		        <a class="nav-link" href="#"><i class="fas fa-bars"></i></a>
+		      </li>
+		   	</ul>
+            <ul class="navbar-nav">
+		      <li class="nav-item">
+		      	<span class="navbar-text py-0" th:utext="${descApp}"></span>
+		      </li>
+		      <li class="nav-item navbar-item-toggler" ng-click="isActiveHelp = false; toggleSidebarMenu(isActiveUser = !isActiveUser)" ng-class="{'active' : isActiveUser}">
+		        <a class="nav-link" href="#"><i class="fas fa-user-circle"></i></a>
+		      </li>
+		      <li class="nav-item  navbar-item-toggler-min"><a class="nav-link" href="/calculadora-tasas/">Calculadora</a></li>
+              <li class="nav-item  navbar-item-toggler-min"><a class="nav-link" href="/calculadora-tasas/GES-FIN/carga-tasas">Carga de Curvas</a></li>
+<!--               <li class="nav-item  navbar-item-toggler-min"><a class="nav-link" href="alta-credito">Alta Crédito</a></li> -->
+		      <li class="nav-item  navbar-item-toggler-min">
+		      	<a class="nav-link" href="#"><i class="fas fa-user-circle"></i> <span class="text-capitalize" sec:authentication="principal['displayName']"></span></a>
+		      </li>
+		      <li class="nav-item  navbar-item-toggler-min">
+		      	<a class="nav-link" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Salir</a>
+		      </li>
+		    </ul>
+		</div>
+	</nav>
+</div>
+
+<div th:fragment="js">
+	<script type="text/javascript" th:src="@{/public/mermaid/mermaid.min.js}" src="../../mermaid.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/FileSaver.min.js}" src="../../FileSaver.min.js"></script>
+	<script type="text/javascript" th:src="@{/public/angular-1.7.2/angular.min.js}" src="../../angular-1.7.2/angular.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/angular-1.7.2/angular-resource.min.js}" src="../../angular-1.7.2/angular-resource.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/angular-1.7.2/angular-animate.min.js}"  src="../../angular-1.7.2/angular-animate.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/ui-bootstrap-tpls-3.0.4.min.js}"  src="../../ui-bootstrap-tpls-3.0.4.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/angular-locale_es-mx.js}" src="../../angular-locale_es-mx.js"></script>
+    <script type="text/javascript" th:src="@{/public/angular-bootstrap-toggle-master/angular-toggle-switch.js}" src="../../angular-bootstrap-toggle-master/dist/angular-toggle-switch.js"></script>
+    <script type="text/javascript" th:src="@{/public/interceptor/angular-toastr.tpls.min.js}" src="../../interceptor/angular-toastr.tpls.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/interceptor/auth.js}" src="../../interceptor/auth.js"></script>
+    <script type="text/javascript" th:src="@{/public/interceptor/loader.js}" src="../../interceptor/loader.js"></script>
+    <script type="text/javascript" th:src="@{/public/interceptor/ng-loading-overlay.min.js}" src="../../interceptor/ng-loading-overlay.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/angular-1.7.2/angular-sanitize.min.js}"  src="../../angular-1.7.2/angular-sanitize.min.js"></script>
+    <script type="text/javascript" th:src="@{/public/ngMask.js}"  src="../../ngMask.js"></script>
+</div>
+ 
+<div th:fragment="menu">
+	<div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+			<!-- <li class="sidebar-brand"><a href="#">Opciones</a></li> -->
+            <li><a th:href="@{/}" sec:authorize="hasAnyAuthority('EJECUTIVO','GEST_FIN')">Men&uacute;</a></li>
+            <li><a th:href="@{/cobroAutomatico}" sec:authorize="hasAnyAuthority('EJECUTIVO','GEST_FIN')">Cobros Autom&aacute;ticos</a></li>
+            <li><a th:href="@{/cobroManual}" sec:authorize="hasAnyAuthority('EJECUTIVO')">Cobros Manuales</a></li>
+            <li><a th:href="@{/facturacion}" sec:authorize="hasAnyAuthority('GEST_FIN','CONTRALORIA','OPERACION_CRED','MESA_OPERACION')">Facturaci&oacute;n</a></li>
+            <li><a th:href="@{/reporting}" sec:authorize="hasAnyAuthority('GEST_FIN')">Reporting</a></li>
+            <li><a th:href="@{/parametria}">Parametr&iacute;a</a></li>
+        </ul>
+    </div>
+    <div id="sidebar-wrapper-right" class="pt-5">
+        <div class="card text-center text-white bg-dark my-1 mx-1" ng-show="isActiveUser">
+		  <div class="card-header">
+		    <i class="fas fa-user-circle fa-2x"></i>
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title" sec:authentication="principal['sAMAccountName']"></h5>
+		    <div class="card-text">
+		    	<p sec:authentication="principal['displayName']"></p>
+		    	<span sec:authentication="principal['roles']"></span>
+		    </div>
+		    <a class="btn btn-primary" th:href="@{/logout}">Salir <i class="fas fa-sign-out-alt"></i></a>
+		  </div>
+		  <div class="card-footer text-muted" sec:authentication="principal['mail']"></div>
+		</div>
+		
+		<!--liliCOM<div class="card text-center text-white bg-dark my-1 mx-1" ng-show="isActiveHelp">
+		  <div class="card-header">
+		    <i class="fas fa-question-circle fa-2x"></i>
+		  </div>
+		    <div class="card-body">
+		    <h5 class="card-title">Ayuda</h5>
+		    <p class="card-text"></p>
+		    <a class="btn btn-primary">Ver tour <i class="fas fa-glasses"></i></a>
+		  </div>
+		 
+		  <div class="card-footer text-muted"></div>
+		   
+		</div>-->
+    </div>
+    <div class="container-fluid title-template" ng-show="initView">
+        <div class="row justify-content-md-center">
+        	<div class="col">
+                <h4 th:utext="${title}"></h4>
+            </div>
+            <div class="col-md-12">
+            	<hr class="my-1">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer">
+	<footer class="mt-5 pt-2 text-muted text-center text-small">
+        <p class="mb-1">© 2019 Santander, Versión 1<span th:text="${applicationVersion}"></span></p>
+        <!-- 
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacidad</a></li>
+          <li class="list-inline-item"><a href="#">Términos</a></li>
+          <li class="list-inline-item"><a href="#">Soporte</a></li>
+        </ul>
+         -->
+    </footer>
+</div>
